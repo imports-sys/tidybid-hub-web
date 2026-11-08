@@ -1,10 +1,10 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="pl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#111d30">
-<title>VowGarden Wedding Planner — podgląd prywatny</title>
+<title>VowGarden Wedding Planner 1.2 — Android i iPhone</title>
 <style>
 :root{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color-scheme:dark;background:#fbf5f3;color:#382a33}
 *{box-sizing:border-box}body{margin:0;background:#101727}header{background:#fff7f5;padding:12px 16px;display:flex;gap:12px;align-items:center;justify-content:space-between;border-bottom:1px solid #2c3f5d;min-height:80px}
@@ -25,7 +25,7 @@ body.full #status{display:none}body.full iframe{position:fixed;inset:60px 0 0;he
 </head>
 <body>
 <header>
-<div><h1>VowGarden — planer ślubny do testowania</h1><div class="sub">Oryginalny kalkulator ofert • Podgląd prywatny • iPhone</div></div>
+<div><h1>VowGarden 1.2 — Wedding Planner</h1><div class="sub">Planner ślubny • Podgląd prywatny • Android i iPhone</div></div>
 <div class="buttons"><a class="link" href="./">Panel Etsy</a><button id="fullBtn" type="button">Pełny ekran</button></div>
 </header>
 <section id="gate">
@@ -49,7 +49,7 @@ body.full #status{display:none}body.full iframe{position:fixed;inset:60px 0 0;he
 const URL_BASE='https://zekvdohbvowzterpfvxo.supabase.co';
 const KEY='sb_publishable_D2mx4zjyafTGDWbHfPvaAQ_e8gqOFk2';
 const SESSION_KEY='tidybid-auth-2026';
-const ENDPOINT=URL_BASE+'/functions/v1/vowgarden-private-preview';
+const ENDPOINT=URL_BASE+'/functions/v1/vowgarden-private-preview-v12';
 const $=id=>document.getElementById(id);
 let session=null,loaded=false;
 function message(s){$('message').textContent=s;}
