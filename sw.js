@@ -1,4 +1,4 @@
-const CACHE='tidybid-hub-pwa-2026-11-08-v3';
+const CACHE='tidybid-hub-pwa-2026-11-08-v4';
 const FILES=['./','./index.html','./manifest.webmanifest','./icon.svg','./icon-180.png','./icon-192.png','./icon-512.png'];
 const scope=new URL(self.registration.scope).pathname;
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(FILES)).then(()=>self.skipWaiting())));

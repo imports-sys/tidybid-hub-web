@@ -41,14 +41,14 @@
 <div class="layout">
   <aside class="sidebar" aria-label="Nawigacja etapów"><div class="brand"><div class="brandmark">T</div><div><strong>TidyBid Hub</strong><small>Cyfrowe produkty • Etsy</small></div></div><div class="tinytitle">Etapy pracy</div><nav id="sideNav"></nav><div class="sidebar-bottom"><span class="green-dot"></span><strong>Tryb prywatny</strong><div>Panel nie łączy się z Etsy i niczego nie publikuje. Dane zapisują się lokalnie na tym urządzeniu.</div></div></aside>
   <main class="main">
-    <div class="headerline"><div><span class="eyebrow">CENTRUM KONTROLI PRODUKTÓW</span><h1>Produkty cyfrowe</h1><p class="subtitle">Pomysły, rozwój, testy i publikacje w jednym miejscu.</p></div><div class="toolbar"><span class="sync-status" id="syncState" role="status">Oczekiwanie na logowanie</span><button class="btn small" type="button" id="signOutBtn">Wyloguj</button><button class="btn" id="exportBtn" type="button">↓ Kopia JSON</button><button class="btn" id="importBtn" type="button">↑ Wczytaj kopię</button><button class="btn primary" id="newBtn" type="button">＋ Nowy produkt</button><input id="importInput" type="file" accept="application/json,.json" /></div></div>
+    <div class="headerline"><div><span class="eyebrow">CENTRUM KONTROLI PRODUKTÓW</span><h1>Produkty cyfrowe</h1><p class="subtitle">Pomysły, rozwój, testy i publikacje w jednym miejscu.</p></div><div class="toolbar"><span class="sync-status" id="syncState" role="status">Oczekiwanie na logowanie</span><button class="btn small" type="button" id="signOutBtn">Wyloguj</button><button class="btn small" type="button" id="refreshBtn">⟳ Odśwież dane</button><button class="btn" id="exportBtn" type="button">↓ Kopia JSON</button><button class="btn" id="importBtn" type="button">↑ Wczytaj kopię</button><button class="btn primary" id="newBtn" type="button">＋ Nowy produkt</button><input id="importInput" type="file" accept="application/json,.json" /></div></div>
     <section class="statgrid" id="stats" aria-label="Statystyki"></section>
     <nav class="mobile-nav" id="mobileNav" aria-label="Etapy pracy"></nav>
     <div class="filterbar"><div><h2 id="viewTitle">Wszystkie produkty</h2><div id="viewCount" class="counter" aria-live="polite"></div></div><label class="fieldsearch"><span aria-hidden="true">⌕</span><span class="sr-only">Szukaj produktów</span><input id="search" type="search" placeholder="Szukaj produktu, funkcji, notatki..." /></label></div>
     <section class="cards" id="cards" aria-live="polite"></section>
-    <div class="notice">🔒 <strong>Bezpieczny tryb roboczy:</strong> panel nie publikuje na Etsy, nie wysyła wiadomości i nie pobiera płatności. Status Etsy wpisujesz ręcznie. Dane z różnych urządzeń nie synchronizują się automatycznie.</div>
-    <div class="install-hint" id="installHint">📱 <strong>Instalacja na iPhonie:</strong> po umieszczeniu panelu na prywatnym hostingu HTTPS otwórz adres w Safari → Udostępnij → Dodaj do ekranu początkowego. Na laptopie wybierz w przeglądarce „Zainstaluj aplikację”. Bez hostingu użyj pliku HTML i regularnych kopii JSON.</div>
-    <div class="datefoot">TidyBid Hub v1.1 • Tryb PWA + offline po instalacji z HTTPS • Dane lokalne na każdym urządzeniu. Wykonuj kopię JSON.</div>
+    <div class="notice">🔒 <strong>Bezpieczny tryb roboczy:</strong> panel nie publikuje ofert na Etsy, nie wysyła wiadomości i nie pobiera płatności. Produkty są przechowywane na Twoim koncie i synchronizowane między zalogowanymi urządzeniami po połączeniu z internetem.</div>
+    <div class="install-hint" id="installHint">📱 <strong>Instalacja na iPhonie:</strong> otwórz stronę w Safari → Udostępnij → Dodaj do ekranu początkowego. Na laptopie użyj w przeglądarce opcji „Zainstaluj aplikację”. Pierwsze logowanie wymaga internetu. Regularnie eksportuj kopię JSON.</div>
+    <div class="datefoot">TidyBid Hub v1.3 • HTTPS + logowanie + synchronizacja w chmurze + PWA • Żadne oferty nie są automatycznie publikowane na Etsy.</div>
   </main>
 </div>
 <div id="overlay" class="overlay" role="dialog" aria-modal="true" aria-labelledby="drawerTitle"><div class="drawer"><div class="drawer-head"><div><div class="eyebrow" id="drawerEyebrow">KARTA PRODUKTU</div><h2 id="drawerTitle">Produkt</h2></div><button class="btn" id="closeBtn" type="button" aria-label="Zamknij">✕</button></div><div class="drawer-body" id="drawerBody"></div></div></div>
@@ -164,7 +164,7 @@ async function dbFetch(query,method='GET',payload){
 }
 async function flushQueue(){
  if(!cloudReady||!cloudUser||syncing)return;
- if(!queue.length){syncLabel('✓ Zsynchronizowano');return;}
+ if(!queue.length){syncLabel('✓ Zsynchronizowano • '+products.length+' produktów');return;}
  if(!navigator.onLine){syncLabel('Offline • '+queue.length+' oczekuje','waiting');return;}
  syncing=true;syncLabel('Zapis w chmurze…','waiting');
  try{
@@ -174,7 +174,7 @@ async function flushQueue(){
    else await dbFetch('?on_conflict=owner_id,product_id','POST',{owner_id:cloudUser,product_id:q.id,payload:q.item,updated_at:new Date().toISOString()});
    if(queue[0]===q){queue.shift();saveQueue();}
   }
-  syncLabel('✓ Zsynchronizowano');
+  syncLabel('✓ Zsynchronizowano • '+products.length+' produktów');
  }catch(e){lastError=e.message;syncLabel('Błąd synchronizacji • '+queue.length+' oczekuje','bad');}
  finally{syncing=false;}
 }
@@ -188,7 +188,7 @@ async function pullCloud(){
    products=fresh;previousRows=new Map(fresh.map(p=>[p.id,JSON.stringify(p)]));
    localStorage.setItem(KEY+'-'+cloudUser,JSON.stringify(products));render();
   }
-  syncLabel('✓ Zsynchronizowano');
+  syncLabel('✓ Zsynchronizowano • '+products.length+' produktów');
  }catch(e){syncLabel('Nie można odczytać zmian','bad');}
 }
 async function openCloud(s){
@@ -243,6 +243,13 @@ $('authPassword').addEventListener('keydown',e=>{if(e.key==='Enter')login(false)
 $('signOutBtn').addEventListener('click',async()=>{
  try{if(session?.access_token)await authFetch('logout','POST',{},session.access_token);}catch{}
  putSession(null);cloudUser=null;cloudReady=false;queue=[];previousRows.clear();products=[];render();showLogin();authMessage('Wylogowano.');syncLabel('Wylogowano');
+});
+document.getElementById('refreshBtn').addEventListener('click',async()=>{
+ if(!cloudUser){syncLabel('Zaloguj się','bad');return;}
+ if(editing){syncLabel('Najpierw zapisz lub zamknij edycję','waiting');return;}
+ syncLabel('Pobieranie zmian…','waiting');
+ await flushQueue();
+ await pullCloud();
 });
 window.addEventListener('online',()=>{flushQueue().then(pullCloud)});
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)flushQueue().then(pullCloud)});
