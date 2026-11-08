@@ -1,0 +1,270 @@
+﻿<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<meta name="theme-color" content="#121427" />
+<meta name="description" content="Prywatny panel do zarządzania produktami cyfrowymi Etsy — testy, ceny, hosting, instrukcje i publikacja." />
+<base href="https://imports-sys.github.io/tidybid-hub-web/" />
+<link rel="manifest" href="manifest.webmanifest" />
+<link rel="icon" type="image/svg+xml" href="icon.svg" />
+<link rel="apple-touch-icon" href="icon-180.png" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-title" content="TidyBid Hub" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<title>TidyBid • Centrum produktów Etsy</title>
+<style>
+:root{color-scheme:dark;--bg:#0c0f1c;--surface:#15192b;--surface2:#20263a;--surface3:#292f44;--ink:#f5f7ff;--sub:#a8b3d0;--stroke:#30384e;--violet:#9b7bff;--aqua:#6fe0db;--mint:#64d8aa;--yellow:#ffcf73;--red:#ff8294;--shadow:0 18px 60px #03071755;--radius:20px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 0 0,#2a2050 0,transparent 31%),radial-gradient(circle at 95% 7%,#10384c 0,transparent 30%),var(--bg);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);min-height:100vh}button,input,select,textarea{font:inherit}button{cursor:pointer}button:disabled{opacity:.46;cursor:not-allowed}a{color:var(--aqua)}.layout{display:grid;grid-template-columns:254px minmax(0,1fr);min-height:100vh}.sidebar{padding:28px 17px;background:#111529d9;border-right:1px solid #30374a;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:20px}.brand{display:flex;gap:11px;align-items:center;padding:8px 7px}.brandmark{width:41px;height:41px;border-radius:13px;background:linear-gradient(145deg,#af83ff,#6bddcf);color:#11182a;font-weight:1000;display:grid;place-items:center;font-size:21px}.brand strong{font-size:17px;letter-spacing:.1px}.brand small{display:block;color:var(--sub);font-size:11px;margin-top:4px}.tinytitle{text-transform:uppercase;font-size:10px;color:#8290b1;font-weight:800;letter-spacing:1.5px;padding:0 13px}.navitem{width:100%;display:flex;align-items:center;justify-content:space-between;text-align:left;color:#c6cce1;background:transparent;border:0;border-radius:12px;padding:12px 14px;min-height:44px;margin:1px 0;font-size:13px;font-weight:650}.navitem:hover,.navitem.active{background:#2b2b4e;color:white}.navitem.active{box-shadow:inset 3px 0 #b29cff}.navitem .qty{font-size:11px;border-radius:20px;padding:3px 8px;background:#ffffff13;color:var(--sub)}.navitem.active .qty{color:#ded4ff;background:#a987ff25}.sidebar-bottom{margin-top:auto;background:#22263c;padding:14px;border:1px solid #343a50;border-radius:15px;color:var(--sub);font-size:12px;line-height:1.6}.green-dot{display:inline-block;background:var(--mint);height:7px;width:7px;border-radius:100%;margin-right:6px}.main{padding:29px clamp(15px,3.2vw,44px) 70px;min-width:0}.headerline{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;flex-wrap:wrap}.eyebrow{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--aqua);font-weight:800}h1{font-size:clamp(25px,3vw,39px);letter-spacing:-.8px;margin:8px 0 8px}h2{font-size:19px}p{line-height:1.5}.muted{color:var(--sub)}.subtitle{color:var(--sub);margin:0;font-size:14px}.toolbar{display:flex;gap:9px;flex-wrap:wrap;align-items:center}.btn{background:var(--surface2);color:var(--ink);border:1px solid #3c4560;border-radius:12px;padding:11px 14px;min-height:43px;font-size:13px;font-weight:750;display:inline-flex;align-items:center;justify-content:center;gap:8px}.btn:hover{background:#333953}.btn.primary{background:linear-gradient(100deg,#b183ff,#77d4dd);color:#141525;border:0;box-shadow:0 8px 24px #9977f531}.btn.primary:hover{filter:brightness(1.08)}.btn.small{min-height:35px;padding:7px 11px;font-size:12px}.btn.danger{color:var(--red);border-color:#834359}.btn:focus-visible,.navitem:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid #9f8bff;outline-offset:2px}.statgrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin:25px 0}.stat{background:linear-gradient(145deg,#202439,#15192b);border:1px solid #343a50;border-radius:16px;padding:17px;min-height:101px}.stat .num{display:block;font-size:29px;font-weight:850;letter-spacing:-1px;margin-bottom:8px}.stat .caption{font-size:11px;color:var(--sub);line-height:1.3}.stat.highlight{border-color:#7166b2;background:linear-gradient(145deg,#292749,#1b2034)}.filterbar{display:flex;flex-wrap:wrap;gap:9px;justify-content:space-between;align-items:center;margin:25px 0 13px}.filterbar h2{margin:0}.fieldsearch{display:flex;align-items:center;gap:8px;background:#1e2336;border:1px solid #394052;border-radius:12px;padding:0 12px;min-width:250px;max-width:390px;flex:1}.fieldsearch input{padding:12px 0;border:0;background:none;outline:none!important;width:100%;color:var(--ink);font-size:13px}.counter{font-size:12px;color:var(--sub)}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.prod{background:linear-gradient(155deg,#1d2136,#141929);border:1px solid #303b52;border-radius:var(--radius);padding:21px;min-width:0;box-shadow:var(--shadow)}.prod-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.product-icon{height:44px;width:44px;border-radius:14px;background:linear-gradient(125deg,#8258d3,#35a7ba);font-size:22px;display:grid;place-items:center;flex-shrink:0}.prod-head{display:flex;align-items:flex-start;gap:12px;min-width:0;flex:1}.prod h3{font-size:17px;margin:0 0 5px;overflow-wrap:anywhere}.prod .smallnote{font-size:12px;color:var(--sub);line-height:1.4}.price{font-size:21px;white-space:nowrap;letter-spacing:-.3px;font-weight:850}.description{font-size:13px;color:#c5cee1;min-height:44px;margin:19px 0 14px}.pills{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}.pill{font-size:11px;font-weight:750;border-radius:999px;padding:6px 9px;color:#dddbff;background:#6457a530;border:1px solid #655d8745}.pill.green{color:var(--mint);background:#244e403b;border-color:#316554}.pill.amber{color:var(--yellow);background:#69512839;border-color:#65513d}.pill.red{color:var(--red);background:#65344430;border-color:#6c3f4b}.pill.grey{color:#c0c9dc;background:#353b4b5a;border-color:#4b5364}.line{height:1px;background:#34394b;margin:17px 0}.progressline{display:flex;justify-content:space-between;gap:9px;font-size:12px;color:var(--sub);margin-bottom:8px}.bar{height:7px;border-radius:999px;background:#383e50;overflow:hidden}.bar>div{height:100%;background:linear-gradient(90deg,#8369ee,#64d6c5);border-radius:999px;transition:width .2s}.prod-footer{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-top:17px}.prod-footer .next{font-size:12px;color:#aeb9d6;max-width:63%;overflow-wrap:anywhere}.notice{background:#192a31;border:1px solid #2d6265;border-radius:13px;padding:13px 16px;color:#b4e4df;font-size:12px;line-height:1.6;margin-top:18px}.empty{padding:36px;text-align:center;border:1px dashed #555e78;border-radius:19px;background:#151a2b;color:var(--sub)}.mobile-nav{display:none}.overlay{position:fixed;inset:0;background:#070916ce;z-index:20;display:none;justify-content:flex-end}.overlay.open{display:flex}.drawer{background:#171b2c;border-left:1px solid #444860;width:min(710px,100%);height:100%;overflow-y:auto;overscroll-behavior:contain;box-shadow:-20px 0 65px #0008;padding:21px 26px 55px}.drawer-head{display:flex;align-items:flex-start;gap:12px;justify-content:space-between;position:sticky;top:-21px;background:#171b2cf4;padding:19px 0 17px;z-index:2;border-bottom:1px solid #383d51}.drawer-head h2{margin:3px 0 0;font-size:22px}.drawer-body{padding-top:18px}.section{margin:19px 0 27px}.section h3{font-size:15px;margin:0 0 14px;color:#f0eaff}.section-sub{font-size:12px;color:var(--sub);margin:-6px 0 13px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.formgroup{min-width:0}.formgroup.full{grid-column:1/-1}label{display:block;margin-bottom:7px;font-size:12px;font-weight:760;color:#c8d2e9}.control{display:block;width:100%;background:#20263b;border:1px solid #424a60;border-radius:11px;padding:11px 12px;color:var(--ink);font-size:13px;min-height:43px}.control:focus{outline:2px solid #9f8bff;outline-offset:0}.control::placeholder{color:#8791ac}textarea.control{resize:vertical;min-height:90px}.testrow{display:grid;grid-template-columns:minmax(0,1fr) 108px 34px;align-items:center;gap:8px;border:1px solid #383e53;border-radius:12px;padding:10px 11px;margin:7px 0;background:#1c2135}.test-title{font-size:13px;word-break:break-word}.test-select{min-width:0;background:#292f47;border:1px solid #4a5369;color:#fff;border-radius:8px;height:37px;padding:5px 3px;font-size:11px;width:100%}.iconbtn{min-width:33px;min-height:34px;border-radius:9px;border:1px solid #4e5267;background:#272b41;color:#ffb3ba}.miniadd{display:flex;gap:8px}.miniadd .control{flex:1}.infolist{color:#b2bdd7;font-size:12px;line-height:1.7}.footeractions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;border-top:1px solid #454a5d;margin-top:22px;padding-top:20px}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);padding:12px 18px;border-radius:13px;border:1px solid #5a6b8b;background:#27324c;color:#fff;z-index:50;box-shadow:var(--shadow);display:none;font-size:13px;max-width:90vw}.toast.show{display:block}#importInput{display:none}.dangertext{color:var(--red)}.sr-only{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}.datefoot{font-size:11px;color:#77839d;padding-top:25px}.quiet{background:none;color:#adb8d5;border:0;font-size:12px;text-decoration:underline;padding:6px}.mobile-stage{display:none}
+@media(max-width:1150px){.statgrid{grid-template-columns:repeat(3,1fr)}.cards{grid-template-columns:1fr}}
+@media(max-width:790px){.layout{display:block}.sidebar{display:none}.main{padding:20px 15px 60px}.mobile-nav{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:18px -15px;padding:0 15px 12px}.mobile-nav::-webkit-scrollbar{display:none}.stagebtn{flex:0 0 auto;border-radius:99px;border:1px solid #3b4260;padding:10px 13px;font-size:12px;color:#b9c3dd;background:#22263b}.stagebtn.active{background:#725ac8;color:white;border-color:#9278eb}.headerline{align-items:stretch}.toolbar{width:100%}.toolbar .btn{flex:1}.statgrid{grid-template-columns:repeat(3,1fr);margin:16px 0}.stat{padding:13px;min-height:81px}.stat .num{font-size:25px}.filterbar{margin:17px 0 12px}.fieldsearch{min-width:0;width:100%;max-width:none}.filterbar h2{font-size:17px}.prod{padding:17px}.description{min-height:0}.drawer{padding:17px 15px 60px}.drawer-head{top:-17px}.formgrid{grid-template-columns:1fr}.mobile-stage{display:block}.testrow{grid-template-columns:minmax(0,1fr) 102px 32px}.prod-footer .next{max-width:100%}.prod-footer{align-items:stretch}.prod-footer .btn{width:100%}.sidebar-bottom{display:none}}
+@media(max-width:390px){.statgrid{grid-template-columns:repeat(2,1fr)}.prod-head{gap:8px}.prod h3{font-size:15px}.price{font-size:18px}.toolbar .btn{padding:10px}}
+
+.install-hint{border:1px solid #444c73;background:#1b2039;padding:13px 16px;border-radius:13px;margin-top:10px;color:#d1d5ef;font-size:12px;line-height:1.65}
+.release-list{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 0;padding:0;list-style:none}
+.release-list li{font-size:12px;border:1px solid #565074;background:#27243e;color:#ebd6ff;padding:8px 10px;border-radius:10px}
+.release-ok{background:#163a32!important;color:#baf2dd!important;border-color:#357262!important}
+.readiness{margin-top:12px;font-size:12px;color:#c7cff1}
+@media(max-width:690px){.install-hint{font-size:12px}}
+.auth-screen{position:fixed;inset:0;background:radial-gradient(circle at top left,#27214d,#101728 65%,#090e1a);z-index:100;display:grid;place-items:center;overflow:auto;padding:18px}.auth-screen[hidden]{display:none}.auth-card{background:#1b2034;border:1px solid #4c526c;border-radius:21px;padding:24px;max-width:445px;width:100%;box-shadow:0 18px 60px #0008}.auth-fields{display:grid;gap:10px;margin:24px 0 18px}.auth-message{font-size:12px;line-height:1.5;color:#b9d6df}.sync-status{padding:9px 12px;border-radius:12px;color:#c6f1ec;background:#22363b;font-size:12px;max-width:280px}.sync-status[data-mode="bad"]{background:#543039;color:#ffd6d9}.sync-status[data-mode="waiting"]{background:#51442c;color:#ffe0a5}body.cloud-locked .layout{display:none}
+</style>
+</head>
+<body class="cloud-locked">
+<div class="auth-screen" id="authScreen" role="dialog" aria-label="Logowanie do TidyBid Hub"><div class="auth-card">
+<div class="brand"><div class="brandmark">T</div><div><strong>TidyBid Hub</strong><small>Prywatny panel Etsy</small></div></div>
+<h1 style="font-size:25px">Zaloguj się</h1><p class="subtitle">Użyj tego samego konta na iPhonie i laptopie, aby synchronizować produkty.</p>
+<div class="auth-fields"><label for="authEmail">Adres e-mail</label><input class="control" type="email" id="authEmail" autocomplete="email" placeholder="twoj@email.co.uk">
+<label for="authPassword">Hasło</label><input class="control" id="authPassword" type="password" autocomplete="current-password" placeholder="Co najmniej 6 znaków">
+<button class="btn primary" id="signInBtn" type="button">Zaloguj</button><button class="btn" id="signUpBtn" type="button">Utwórz konto</button>
+<div class="auth-message" id="authMessage" role="status">Jeśli nie masz jeszcze konta, wybierz „Utwórz konto”.</div></div>
+<p class="muted" style="font-size:11px">Konto panelu jest oddzielne od Etsy. Panel nigdy nie publikuje ofert ani nie wysyła wiadomości na Etsy.</p></div></div>
+<div class="layout">
+  <aside class="sidebar" aria-label="Nawigacja etapów"><div class="brand"><div class="brandmark">T</div><div><strong>TidyBid Hub</strong><small>Cyfrowe produkty • Etsy</small></div></div><div class="tinytitle">Etapy pracy</div><nav id="sideNav"></nav><div class="sidebar-bottom"><span class="green-dot"></span><strong>Tryb prywatny</strong><div>Panel nie łączy się z Etsy i niczego nie publikuje. Dane zapisują się lokalnie na tym urządzeniu.</div></div></aside>
+  <main class="main">
+    <div class="headerline"><div><span class="eyebrow">CENTRUM KONTROLI PRODUKTÓW</span><h1>Produkty cyfrowe</h1><p class="subtitle">Pomysły, rozwój, testy i publikacje w jednym miejscu.</p></div><div class="toolbar"><span class="sync-status" id="syncState" role="status">Oczekiwanie na logowanie</span><button class="btn small" type="button" id="signOutBtn">Wyloguj</button><button class="btn" id="exportBtn" type="button">↓ Kopia JSON</button><button class="btn" id="importBtn" type="button">↑ Wczytaj kopię</button><button class="btn primary" id="newBtn" type="button">＋ Nowy produkt</button><input id="importInput" type="file" accept="application/json,.json" /></div></div>
+    <section class="statgrid" id="stats" aria-label="Statystyki"></section>
+    <nav class="mobile-nav" id="mobileNav" aria-label="Etapy pracy"></nav>
+    <div class="filterbar"><div><h2 id="viewTitle">Wszystkie produkty</h2><div id="viewCount" class="counter" aria-live="polite"></div></div><label class="fieldsearch"><span aria-hidden="true">⌕</span><span class="sr-only">Szukaj produktów</span><input id="search" type="search" placeholder="Szukaj produktu, funkcji, notatki..." /></label></div>
+    <section class="cards" id="cards" aria-live="polite"></section>
+    <div class="notice">🔒 <strong>Bezpieczny tryb roboczy:</strong> panel nie publikuje na Etsy, nie wysyła wiadomości i nie pobiera płatności. Status Etsy wpisujesz ręcznie. Dane z różnych urządzeń nie synchronizują się automatycznie.</div>
+    <div class="install-hint" id="installHint">📱 <strong>Instalacja na iPhonie:</strong> po umieszczeniu panelu na prywatnym hostingu HTTPS otwórz adres w Safari → Udostępnij → Dodaj do ekranu początkowego. Na laptopie wybierz w przeglądarce „Zainstaluj aplikację”. Bez hostingu użyj pliku HTML i regularnych kopii JSON.</div>
+    <div class="datefoot">TidyBid Hub v1.1 • Tryb PWA + offline po instalacji z HTTPS • Dane lokalne na każdym urządzeniu. Wykonuj kopię JSON.</div>
+  </main>
+</div>
+<div id="overlay" class="overlay" role="dialog" aria-modal="true" aria-labelledby="drawerTitle"><div class="drawer"><div class="drawer-head"><div><div class="eyebrow" id="drawerEyebrow">KARTA PRODUKTU</div><h2 id="drawerTitle">Produkt</h2></div><button class="btn" id="closeBtn" type="button" aria-label="Zamknij">✕</button></div><div class="drawer-body" id="drawerBody"></div></div></div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script>
+(()=>{'use strict';
+const KEY='tidybid-etsy-products-v1';
+const CLOUD_URL='https://zekvdohbvowzterpfvxo.supabase.co', CLOUD_KEY='sb_publishable_D2mx4zjyafTGDWbHfPvaAQ_e8gqOFk2', SESSION_KEY='tidybid-auth-2026', CLOUD_OWNER='tidybid-current-owner';
+let session=null, cloudUser=null, cloudReady=false, queue=[], previousRows=new Map(), syncing=false, lastError='';
+
+const STAGES=['Pomysły','W budowie','Do testów','Gotowe do publikacji','Opublikowane'];
+const PUBLICATION=['Nieopublikowane','W przygotowaniu','Oczekuje na weryfikację','Zgłoszono jako opublikowane','Zgłoszono jako aktywne','Wstrzymane'];
+const TS=['Niesprawdzone','Zaliczone','Wymaga poprawy'];
+const DEFAULTS=[];
+const $=id=>document.getElementById(id);
+let products=load(),filter='Wszystkie',term='',editing=null;
+function escapeHTML(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function uid(){return 'p'+Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
+function validURL(v){try{const u=new URL(String(v||''));return u.protocol==='https:'||u.protocol==='http:'}catch{return false}}
+function safeLoadValue(v){return typeof v==='string'?v.slice(0,40000):''}
+function normalize(p){return {id:safeLoadValue(p.id)||uid(),name:safeLoadValue(p.name)||'Nowy produkt',version:safeLoadValue(p.version),description:safeLoadValue(p.description),stage:STAGES.includes(p.stage)?p.stage:STAGES[0],price:safeLoadValue(p.price),platform:safeLoadValue(p.platform),testUrl:safeLoadValue(p.testUrl),etsyUrl:safeLoadValue(p.etsyUrl),etsyId:safeLoadValue(p.etsyId),hosting:safeLoadValue(p.hosting),publication:PUBLICATION.includes(p.publication)?p.publication:PUBLICATION[0],publicationNote:safeLoadValue(p.publicationNote),instruction:safeLoadValue(p.instruction),notes:safeLoadValue(p.notes),next:safeLoadValue(p.next),tests:Array.isArray(p.tests)?p.tests.slice(0,150).map(t=>({name:safeLoadValue(t?.name),state:TS.includes(t?.state)?t.state:TS[0]})).filter(t=>t.name):[]}}
+function load(){try{const raw=localStorage.getItem(KEY);if(raw){const x=JSON.parse(raw);if(Array.isArray(x))return x.map(normalize).slice(0,500)}}catch(e){console.warn('Brak danych',e)}return DEFAULTS.map(normalize)}
+function persist(){
+ try{localStorage.setItem(KEY,JSON.stringify(products)); if(cloudUser)localStorage.setItem(KEY+'-'+cloudUser,JSON.stringify(products));}
+ catch(e){toast('Błąd lokalnego zapisu — wykonaj kopię JSON.');return false;}
+ if(cloudReady&&cloudUser){
+   const now=new Map(products.map(x=>[x.id,JSON.stringify(x)]));
+   for(const id of previousRows.keys()){if(!now.has(id))addQueue({op:'delete',id});}
+   for(const p of products){if(now.get(p.id)!==previousRows.get(p.id))addQueue({op:'upsert',id:p.id,item:p});}
+   previousRows=now;
+   flushQueue();
+ }
+ return true;
+}
+function toast(s){$('toast').textContent=s;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),3000)}
+function releaseIssues(p){
+  const x=[];
+  if(!p.tests.length)x.push('Brak listy testów');
+  else if(p.tests.some(t=>t.state==='Wymaga poprawy'))x.push('Testy wymagają poprawy');
+  if(p.tests.some(t=>t.state==='Niesprawdzone'))x.push('Testy nieukończone');
+  if(!(Number(p.price)>0))x.push('Nieustalona cena GBP');
+  if(!validURL(p.testUrl))x.push('Brak sprawdzonego linku podglądu');
+  if(!p.instruction.trim())x.push('Brak instrukcji klienta');
+  if(!p.hosting.trim())x.push('Brak danych o hostingu/dostarczeniu');
+  if(!p.platform.trim())x.push('Brak opisu wersji mobilnej');
+  if(p.stage==='Opublikowane'&&!p.publication.includes('opublikowane')&&!p.publication.includes('aktywne'))x.push('Etap i status Etsy się różnią');
+  return x;
+}
+function releaseMarkup(p){const issues=releaseIssues(p);return `<div class="readiness"><strong>Kontrola gotowości:</strong> ${issues.length===0?'wszystkie pola kontrolne uzupełnione':'do sprawdzenia: '+issues.length}</div><ul class="release-list">${issues.length?issues.map(x=>`<li>${escapeHTML(x)}</li>`).join(''):'<li class="release-ok">✓ Lista kontrolna kompletna</li>'}</ul>`}
+function percent(p){if(!p.tests.length)return 0;return Math.round(p.tests.filter(t=>t.state==='Zaliczone').length/p.tests.length*100)}
+function price(p){const v=Number(p.price);return Number.isFinite(v)&&p.price.trim()!==''?'£'+v.toFixed(2):'—'}
+function stageClass(s){return s==='Opublikowane'?'green':s==='Do testów'?'amber':s==='Gotowe do publikacji'?'green':s==='W budowie'?'grey':''}
+function testStatus(p){const f=p.tests.filter(t=>t.state==='Wymaga poprawy').length, ok=p.tests.filter(t=>t.state==='Zaliczone').length;return f?`${f} do poprawy`:ok===p.tests.length&&ok>0?'Testy zaliczone':`${p.tests.length-ok} do sprawdzenia`}
+function renderNav(){const navs=[['Wszystkie','Wszystkie'],...STAGES.map(s=>[s,s])];$('sideNav').innerHTML=navs.map(([name,f])=>`<button type="button" class="navitem ${filter===f?'active':''}" data-filter="${escapeHTML(f)}"><span>${name}</span><span class="qty">${f==='Wszystkie'?products.length:products.filter(p=>p.stage===f).length}</span></button>`).join('');$('mobileNav').innerHTML=navs.map(([name,f])=>`<button type="button" class="stagebtn ${filter===f?'active':''}" data-filter="${escapeHTML(f)}">${name} · ${f==='Wszystkie'?products.length:products.filter(p=>p.stage===f).length}</button>`).join('');document.querySelectorAll('[data-filter]').forEach(b=>b.addEventListener('click',()=>{filter=b.dataset.filter;render()}))}
+function render(){renderNav();$('stats').innerHTML=[['Produkty',products.length],['Pomysły',products.filter(p=>p.stage==='Pomysły').length],['W budowie',products.filter(p=>p.stage==='W budowie').length],['Do testów',products.filter(p=>p.stage==='Do testów').length],['Opublikowane',products.filter(p=>p.stage==='Opublikowane').length]].map(([n,v],i)=>`<div class="stat ${i===0?'highlight':''}"><span class="num">${v}</span><span class="caption">${n}</span></div>`).join('');const visible=products.filter(p=>(filter==='Wszystkie'||p.stage===filter)&&[p.name,p.description,p.next,p.notes,p.tests.map(t=>t.name).join(' ')].join(' ').toLowerCase().includes(term));$('viewTitle').textContent=filter==='Wszystkie'?'Wszystkie produkty':filter;$('viewCount').textContent=visible.length+' '+(visible.length===1?'produkt':(visible.length>=2&&visible.length<=4?'produkty':'produktów'))+' w widoku';if(!visible.length){$('cards').innerHTML='<div class="empty">Brak produktów w tym widoku. Zmień filtr lub dodaj nowy produkt.</div>';return}
+$('cards').innerHTML=visible.map(p=>`<article class="prod"><div class="prod-top"><div class="prod-head"><div class="product-icon" aria-hidden="true">${p.stage==='Opublikowane'?'🛍️':'📱'}</div><div><h3>${escapeHTML(p.name)}</h3><span class="smallnote">Wersja ${escapeHTML(p.version||'—')} · ${escapeHTML(p.platform||'Wersja mobilna do ustalenia')}</span></div></div><div class="price">${price(p)}</div></div><div class="pills"><span class="pill ${stageClass(p.stage)}">${escapeHTML(p.stage)}</span><span class="pill ${p.publication.includes('aktywne')?'green':'grey'}">Etsy: ${escapeHTML(p.publication)}</span></div><p class="description">${escapeHTML(p.description||'Brak opisu.')}</p><div class="progressline"><span>Testy zaliczone: ${p.tests.filter(t=>t.state==='Zaliczone').length}/${p.tests.length}</span><span>${percent(p)}%</span></div><div class="bar" aria-label="Postęp testów ${percent(p)} procent"><div style="width:${percent(p)}%"></div></div><div class="pills"><span class="pill ${p.tests.some(t=>t.state==='Wymaga poprawy')?'red':'grey'}">${escapeHTML(testStatus(p))}</span><span class="pill ${validURL(p.testUrl)?'green':'amber'}">${validURL(p.testUrl)?'Link do testów dodany':'Brak linku do testów'}</span></div>${releaseMarkup(p)}<div class="line"></div><div class="prod-footer"><span class="next"><strong>Następny krok:</strong> ${escapeHTML(p.next||'Uzupełnij dane i testy.')}</span><div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn small" type="button" data-preview="${escapeHTML(p.id)}" ${validURL(p.testUrl)?'':'disabled title="Najpierw dodaj link do podglądu"'}>↗ Podgląd</button><button class="btn small" type="button" data-open="${escapeHTML(p.id)}">Otwórz kartę →</button></div></div></article>`).join('');document.querySelectorAll('[data-open]').forEach(b=>b.addEventListener('click',()=>openEditor(b.dataset.open)));document.querySelectorAll('[data-preview]').forEach(b=>b.addEventListener('click',()=>{const p=products.find(x=>x.id===b.dataset.preview);if(p&&validURL(p.testUrl))window.open(p.testUrl,'_blank','noopener,noreferrer')}))}
+function fg(label,field,kind='input',full=false,extra=''){const v=editing[field]??'';let ctl=kind==='textarea'?`<textarea class="control" id="f_${field}" rows="3" ${extra}>${escapeHTML(v)}</textarea>`:kind==='stage'?`<select class="control" id="f_stage">${STAGES.map(s=>`<option value="${escapeHTML(s)}" ${s===editing.stage?'selected':''}>${escapeHTML(s)}</option>`).join('')}</select>`:kind==='publication'?`<select class="control" id="f_publication">${PUBLICATION.map(s=>`<option value="${escapeHTML(s)}" ${s===editing.publication?'selected':''}>${escapeHTML(s)}</option>`).join('')}</select>`:`<input class="control" id="f_${field}" type="${field==='price'?'number':'text'}" ${field==='price'?'min="0" step="0.01" inputmode="decimal"':''} value="${escapeHTML(v)}" ${extra}>`;return `<div class="formgroup ${full?'full':''}"><label for="f_${field}">${label}</label>${ctl}</div>`}
+function openEditor(id){const p=products.find(p=>p.id===id);if(!p)return;editing=JSON.parse(JSON.stringify(p));$('drawerTitle').textContent=editing.name;$('drawerEyebrow').textContent='KARTA PRODUKTU';$('overlay').classList.add('open');document.body.style.overflow='hidden';renderEditor()}
+function newEditor(){editing=normalize({id:uid(),name:'Nowy produkt',stage:'Pomysły',price:'',tests:[{name:'Otwieranie podglądu na iPhonie',state:'Niesprawdzone'},{name:'Działanie przycisków i formularzy',state:'Niesprawdzone'},{name:'Zapis i odczyt danych',state:'Niesprawdzone'},{name:'Instrukcja klienta',state:'Niesprawdzone'}]});$('drawerTitle').textContent='Nowy produkt';$('drawerEyebrow').textContent='DODAWANIE PRODUKTU';$('overlay').classList.add('open');document.body.style.overflow='hidden';renderEditor()}
+function saveFieldsIntoEditing(){if(!editing)return;['name','version','description','stage','price','platform','testUrl','etsyUrl','etsyId','hosting','publication','publicationNote','instruction','notes','next'].forEach(k=>{const inp=$('f_'+k);if(inp)editing[k]=inp.value})}
+function renderEditor(){const p=editing;if(!p)return;const html=`<div class="section"><h3>Informacje podstawowe</h3><div class="formgrid">${fg('Nazwa produktu','name','input',true,'maxlength="180"')}${fg('Wersja aplikacji','version')}${fg('Cena w GBP (£)','price')}${fg('Etap pracy','stage','stage')}${fg('Status publikacji Etsy','publication','publication')}${fg('Opis','description','textarea',true)}${fg('Wersja mobilna','platform','textarea',true)}${fg('Link do podglądu / testów (http lub https)','testUrl','input',true,'placeholder="https://..."')}${fg('Hosting i sposób dostarczania','hosting','textarea',true)}</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"><button class="btn small" type="button" id="previewBtn" ${validURL(p.testUrl)?'':'disabled'}>↗ Otwórz podgląd aplikacji</button><span class="muted" style="font-size:12px;align-self:center">Podgląd działa po wpisaniu prawdziwego linku.</span></div></div>
+<div class="section"><h3>Lista testów przycisków i funkcji</h3><p class="section-sub">Wybierz: Niesprawdzone, Zaliczone albo Wymaga poprawy. Postęp liczy tylko zaliczone testy.</p><div id="testList">${p.tests.map((t,i)=>`<div class="testrow"><span class="test-title">${escapeHTML(t.name)}</span><select class="test-select" aria-label="Wynik testu ${escapeHTML(t.name)}" data-test-index="${i}">${TS.map(s=>`<option value="${escapeHTML(s)}" ${t.state===s?'selected':''}>${escapeHTML(s)}</option>`).join('')}</select><button class="iconbtn" type="button" title="Usuń test" aria-label="Usuń test ${escapeHTML(t.name)}" data-delete-index="${i}">✕</button></div>`).join('')}</div><div class="miniadd"><input id="newTestInput" class="control" placeholder="Dodaj test funkcji / przycisku" maxlength="180" /><button id="addTestBtn" class="btn small" type="button">＋ Dodaj</button></div></div>
+<div class="section"><h3>Kontrola przed publikacją</h3><p class="section-sub">Kontrola uzupełnienia informacji; nie zastępuje rzeczywistego testu aplikacji ani sprawdzenia oferty Etsy. Zaktualizuje się po zapisaniu karty.</p>${releaseMarkup(p)}</div>
+<div class="section"><h3>Etsy i materiały klienta</h3><div class="formgrid">${fg('ID oferty Etsy (opcjonalnie)','etsyId')}${fg('Link do oferty Etsy','etsyUrl')}${fg('Notatka o stanie oferty','publicationNote','textarea',true)}${fg('Instrukcja obsługi dla klienta','instruction','textarea',true)}</div><p class="infolist">Status publikacji jest deklaracją ręczną. Panel nie sprawdza Etsy na żywo i nie publikuje produktów.</p></div>
+<div class="section"><h3>Uwagi i kolejny krok</h3><div class="formgrid">${fg('Uwagi / błędy / decyzje','notes','textarea',true)}${fg('Następny bezpieczny krok','next','textarea',true)}</div></div>
+<div class="footeractions"><button class="btn primary" type="button" id="saveBtn">✓ Zapisz zmiany</button><button class="btn" type="button" id="cancelBtn">Anuluj</button><button class="btn danger" type="button" id="deleteBtn">Usuń produkt</button></div>`;
+$('drawerBody').innerHTML=html;
+$('previewBtn').addEventListener('click',()=>{saveFieldsIntoEditing();if(validURL(editing.testUrl))window.open(editing.testUrl,'_blank','noopener,noreferrer')});
+$('saveBtn').addEventListener('click',saveEditing);
+$('cancelBtn').addEventListener('click',closeEditor);
+$('deleteBtn').addEventListener('click',()=>{if(confirm(`Usunąć produkt „${editing.name}”? Ta operacja dotyczy tylko panelu.`)){products=products.filter(p=>p.id!==editing.id);persist();closeEditor();render();toast('Produkt usunięty z panelu.')}});
+$('addTestBtn').addEventListener('click',()=>{const x=$('newTestInput').value.trim();if(!x){toast('Wpisz nazwę testu.');return}saveFieldsIntoEditing();editing.tests.push({name:x,state:'Niesprawdzone'});renderEditor();$('newTestInput').focus()});$('newTestInput').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();$('addTestBtn').click()}});
+document.querySelectorAll('[data-test-index]').forEach(el=>el.addEventListener('change',()=>{editing.tests[Number(el.dataset.testIndex)].state=el.value}));
+document.querySelectorAll('[data-delete-index]').forEach(el=>el.addEventListener('click',()=>{saveFieldsIntoEditing();editing.tests.splice(Number(el.dataset.deleteIndex),1);renderEditor()}));
+$('f_testUrl').addEventListener('input',e=>{$('previewBtn').disabled=!validURL(e.target.value)});
+}
+function saveEditing(){saveFieldsIntoEditing();editing.name=editing.name.trim();if(!editing.name){toast('Podaj nazwę produktu.');$('f_name').focus();return}if(editing.testUrl&&!validURL(editing.testUrl)){toast('Link do testów musi zaczynać się od http:// lub https://.');$('f_testUrl').focus();return}if(editing.etsyUrl&&!validURL(editing.etsyUrl)){toast('Link Etsy musi być poprawnym adresem http/https.');$('f_etsyUrl').focus();return}if(editing.price!==''&&(!Number.isFinite(Number(editing.price))||Number(editing.price)<0)){toast('Cena GBP musi być poprawna i nieujemna.');return}const idx=products.findIndex(x=>x.id===editing.id);if(idx>=0)products[idx]=normalize(editing);else products.push(normalize(editing));persist();closeEditor();render();toast('Zapisano kartę produktu na tym urządzeniu.')}
+function closeEditor(){$('overlay').classList.remove('open');document.body.style.overflow='';editing=null}
+function exportData(){const backup={format:'tidybid-etsy-hub-v1',exportedAt:new Date().toISOString(),products};const blob=new Blob([JSON.stringify(backup,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='TidyBid_Etsy_produkty_kopia_'+new Date().toISOString().slice(0,10)+'.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),5000);toast('Kopia JSON przygotowana do pobrania.')}
+async function importData(file){if(!file)return;try{if(file.size>3000000)throw Error('Plik jest za duży (maksymalnie 3 MB).');const o=JSON.parse(await file.text());if(o.format!=='tidybid-etsy-hub-v1'||!Array.isArray(o.products)||o.products.length>500)throw Error('To nie jest prawidłowa kopia panelu.');const data=o.products.map(normalize);if(!confirm(`Wczytać ${data.length} produktów? Obecne dane na tym urządzeniu zostaną zastąpione.`))return;products=data;persist();filter='Wszystkie';term='';$('search').value='';render();toast('Wczytano kopię danych.')}catch(e){toast('Nie udało się wczytać: '+e.message)}finally{$('importInput').value=''}}
+if('serviceWorker' in navigator && (location.protocol==='https:'||location.hostname==='localhost')){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(e=>console.info('Tryb offline niedostępny:',e)));}
+$('search').addEventListener('input',e=>{term=e.target.value.toLowerCase().trim();render()});$('newBtn').addEventListener('click',newEditor);$('closeBtn').addEventListener('click',closeEditor);$('overlay').addEventListener('click',e=>{if(e.target===$('overlay'))closeEditor()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&editing)closeEditor()});$('exportBtn').addEventListener('click',exportData);$('importBtn').addEventListener('click',()=>$('importInput').click());$('importInput').addEventListener('change',e=>importData(e.target.files?.[0]));
+const authUI=$('authScreen');
+function authMessage(x){$('authMessage').textContent=x;}
+function syncLabel(x,mode=''){const el=$('syncState');el.textContent=x;el.dataset.mode=mode;}
+function showPanel(){document.body.classList.remove('cloud-locked');authUI.hidden=true;}
+function showLogin(){document.body.classList.add('cloud-locked');authUI.hidden=false;}
+function putSession(s){session=s;try{if(s)localStorage.setItem(SESSION_KEY,JSON.stringify(s));else localStorage.removeItem(SESSION_KEY);}catch{}}
+function storedProducts(){try{const r=JSON.parse(localStorage.getItem(KEY+'-'+cloudUser)||'[]');return Array.isArray(r)?r.map(normalize):[];}catch{return [];}}
+function pendingKey(){return 'tidybid-pending-'+cloudUser;}
+function saveQueue(){try{localStorage.setItem(pendingKey(),JSON.stringify(queue));}catch{}}
+function addQueue(action){queue=queue.filter(x=>x.id!==action.id);queue.push(action);saveQueue();syncLabel('Oczekuje: '+queue.length,'waiting');}
+async function authFetch(route,method='GET',body=null,token=null){
+ const res=await fetch(CLOUD_URL+'/auth/v1/'+route,{method,headers:{apikey:CLOUD_KEY,'Content-Type':'application/json',...(token?{Authorization:'Bearer '+token}:{})},body:body?JSON.stringify(body):undefined,cache:'no-store'});
+ const data=await res.json().catch(()=>({}));
+ if(!res.ok)throw Error(data.msg||data.error_description||data.message||data.error||'HTTP '+res.status);
+ return data;
+}
+async function getToken(){
+ if(!session?.access_token)throw Error('Zaloguj się ponownie');
+ if((session.expires_at||0)*1000>Date.now()+60000)return session.access_token;
+ if(!session.refresh_token)throw Error('Sesja wygasła');
+ const newSession=await authFetch('token?grant_type=refresh_token','POST',{refresh_token:session.refresh_token});
+ putSession({...newSession,expires_at:newSession.expires_at||Math.floor(Date.now()/1000)+newSession.expires_in});
+ return session.access_token;
+}
+async function dbFetch(query,method='GET',payload){
+ const token=await getToken();
+ const resp=await fetch(CLOUD_URL+'/rest/v1/tidybid_hub_products'+query,{method,headers:{apikey:CLOUD_KEY,Authorization:'Bearer '+token,'Content-Type':'application/json',Accept:'application/json',...(method==='POST'?{Prefer:'resolution=merge-duplicates,return=minimal'}:{})},body:payload===undefined?undefined:JSON.stringify(payload),cache:'no-store'});
+ if(!resp.ok){const d=await resp.json().catch(()=>({}));throw Error(d.message||d.error||'Błąd bazy HTTP '+resp.status);}
+ if(resp.status===204||resp.status===201)return null;
+ return await resp.json().catch(()=>null);
+}
+async function flushQueue(){
+ if(!cloudReady||!cloudUser||syncing)return;
+ if(!queue.length){syncLabel('✓ Zsynchronizowano');return;}
+ if(!navigator.onLine){syncLabel('Offline • '+queue.length+' oczekuje','waiting');return;}
+ syncing=true;syncLabel('Zapis w chmurze…','waiting');
+ try{
+  while(queue.length){
+   const q=queue[0];
+   if(q.op==='delete')await dbFetch('?owner_id=eq.'+encodeURIComponent(cloudUser)+'&product_id=eq.'+encodeURIComponent(q.id),'DELETE');
+   else await dbFetch('?on_conflict=owner_id,product_id','POST',{owner_id:cloudUser,product_id:q.id,payload:q.item,updated_at:new Date().toISOString()});
+   if(queue[0]===q){queue.shift();saveQueue();}
+  }
+  syncLabel('✓ Zsynchronizowano');
+ }catch(e){lastError=e.message;syncLabel('Błąd synchronizacji • '+queue.length+' oczekuje','bad');}
+ finally{syncing=false;}
+}
+async function pullCloud(){
+ if(!cloudReady||!cloudUser||syncing||queue.length||editing||!navigator.onLine)return;
+ try{
+  const rows=await dbFetch('?select=product_id,payload&order=updated_at.asc');
+  if(!Array.isArray(rows))return;
+  const fresh=rows.map(x=>normalize({...x.payload,id:x.product_id}));
+  if(JSON.stringify(fresh)!==JSON.stringify(products)){
+   products=fresh;previousRows=new Map(fresh.map(p=>[p.id,JSON.stringify(p)]));
+   localStorage.setItem(KEY+'-'+cloudUser,JSON.stringify(products));render();
+  }
+  syncLabel('✓ Zsynchronizowano');
+ }catch(e){syncLabel('Nie można odczytać zmian','bad');}
+}
+async function openCloud(s){
+ putSession({...s,expires_at:s.expires_at||Math.floor(Date.now()/1000)+(s.expires_in||3600)});
+ const user=session.user||await authFetch('user','GET',null,await getToken());
+ if(!user?.id)throw Error('Nie znaleziono identyfikatora konta.');
+ cloudUser=user.id;
+ const oldOwner=localStorage.getItem(CLOUD_OWNER);
+ const isOther=Boolean(oldOwner&&oldOwner!==cloudUser);
+ const saved=storedProducts();
+ try{
+   queue=JSON.parse(localStorage.getItem(pendingKey())||'[]');
+   if(!Array.isArray(queue))queue=[];
+ }catch{queue=[];}
+ const rows=await dbFetch('?select=product_id,payload&order=updated_at.asc');
+ if(!Array.isArray(rows))throw Error('Nie można pobrać produktów.');
+ if(rows.length){
+   const merged=new Map(rows.map(x=>[x.product_id,normalize({...x.payload,id:x.product_id})]));
+   for(const q of queue){if(q.op==='delete')merged.delete(q.id);else merged.set(q.id,normalize(q.item));}
+   products=[...merged.values()];
+ }else if(queue.length){
+   products=saved;
+   for(const q of queue){const i=products.findIndex(p=>p.id===q.id);if(q.op==='delete'&&i>=0)products.splice(i,1);if(q.op==='upsert'){if(i>=0)products[i]=normalize(q.item);else products.push(normalize(q.item));}}
+ }else if(saved.length){products=saved;queue=products.map(p=>({op:'upsert',id:p.id,item:p}));saveQueue();}
+ else if(!isOther&&!oldOwner){
+   // Pierwsze logowanie na starym urządzeniu: można przejąć istniejące produkty z lokalnego panelu.
+   queue=products.map(p=>({op:'upsert',id:p.id,item:p}));saveQueue();
+ }else products=[];
+ localStorage.setItem(CLOUD_OWNER,cloudUser);
+ localStorage.setItem(KEY+'-'+cloudUser,JSON.stringify(products));
+ previousRows=new Map(products.map(p=>[p.id,JSON.stringify(p)]));
+ cloudReady=true;render();showPanel();
+ await flushQueue();
+}
+async function login(doSignup=false){
+ const email=$('authEmail').value.trim(),password=$('authPassword').value;
+ if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)||password.length<6){authMessage('Podaj poprawny e-mail i hasło (min. 6 znaków).');return;}
+ $('signInBtn').disabled=$('signUpBtn').disabled=true;
+ try{
+  authMessage(doSignup?'Tworzenie konta…':'Logowanie…');
+  if(doSignup){
+   const s=await authFetch('signup','POST',{email,password});
+   if(s.access_token)await openCloud(s);
+   else authMessage('Konto utworzono. Sprawdź e-mail potwierdzający, a potem zaloguj się.');
+  }else await openCloud(await authFetch('token?grant_type=password','POST',{email,password}));
+ }catch(e){authMessage('Nie udało się: '+e.message);}
+ finally{$('signInBtn').disabled=$('signUpBtn').disabled=false;}
+}
+$('signInBtn').addEventListener('click',()=>login(false));
+$('signUpBtn').addEventListener('click',()=>login(true));
+$('authPassword').addEventListener('keydown',e=>{if(e.key==='Enter')login(false)});
+$('signOutBtn').addEventListener('click',async()=>{
+ try{if(session?.access_token)await authFetch('logout','POST',{},session.access_token);}catch{}
+ putSession(null);cloudUser=null;cloudReady=false;queue=[];previousRows.clear();products=[];render();showLogin();authMessage('Wylogowano.');syncLabel('Wylogowano');
+});
+window.addEventListener('online',()=>{flushQueue().then(pullCloud)});
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)flushQueue().then(pullCloud)});
+setInterval(()=>{if(!document.hidden)flushQueue().then(pullCloud)},30000);
+(async()=>{
+ let cached=null;try{cached=JSON.parse(localStorage.getItem(SESSION_KEY)||'null');}catch{}
+ if(!cached?.access_token)return;
+ try{await openCloud(cached);}
+ catch(e){
+  if(!navigator.onLine&&cached.user?.id){
+   session=cached;cloudUser=cached.user.id;products=storedProducts();
+   try{queue=JSON.parse(localStorage.getItem(pendingKey())||'[]');if(!Array.isArray(queue))queue=[];}catch{queue=[];}
+   previousRows=new Map(products.map(p=>[p.id,JSON.stringify(p)]));
+   cloudReady=true;render();showPanel();syncLabel('Offline • synchronizacja po połączeniu','waiting');
+   return;
+  }
+  putSession(null);cloudUser=null;cloudReady=false;authMessage('Zaloguj się ponownie: '+e.message);showLogin();
+ }
+})();
+
+render();
+})();
+</script>
+</body>
+</html>

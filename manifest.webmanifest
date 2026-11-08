@@ -1,0 +1,26 @@
+{
+  "name": "TidyBid Hub — produkty Etsy",
+  "short_name": "TidyBid Hub",
+  "description": "Prywatny panel produktów cyfrowych Etsy",
+  "lang": "pl",
+  "start_url": "https://imports-sys.github.io/tidybid-hub-web/",
+  "scope": "https://imports-sys.github.io/tidybid-hub-web/",
+  "id": "https://imports-sys.github.io/tidybid-hub-web/",
+  "display": "standalone",
+  "background_color": "#0c0f1c",
+  "theme_color": "#121427",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
