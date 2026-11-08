@@ -1,0 +1,118 @@
+﻿<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111d30">
+<title>VowGarden Wedding Planner 1.3 • Cloud Preview — Android i iPhone</title>
+<style>
+:root{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color-scheme:dark;background:#fbf5f3;color:#382a33}
+*{box-sizing:border-box}body{margin:0;background:#101727}header{background:#fff7f5;padding:12px 16px;display:flex;gap:12px;align-items:center;justify-content:space-between;border-bottom:1px solid #2c3f5d;min-height:80px}
+h1{margin:0;font-size:18px;line-height:1.3}.sub{font-size:12px;color:#8e7782;margin-top:3px}.buttons{display:flex;gap:8px;flex-wrap:wrap}
+button,.link{font:inherit;font-size:13px;font-weight:750;cursor:pointer;color:white;background:#e6d5dd;border:1px solid #d8b6c4;padding:10px 13px;border-radius:10px;text-decoration:none}
+.primary{background:linear-gradient(110deg,#b76682,#d7a5b5);border-color:transparent}
+section#gate{max-width:560px;margin:28px auto;padding:0 15px}
+.panel{border-radius:18px;background:#fffdfc;border:1px solid #e4d3db;padding:24px}
+label{font-size:13px;display:block;margin:15px 0 6px}input{width:100%;padding:14px;border-radius:10px;background:#fffaf9;border:1px solid #d7bec8;color:white;font-size:16px}
+.panel button{margin-top:18px;width:100%}.muted{color:#796e78;font-size:13px;line-height:1.6}
+#message{margin:13px 0;color:#b4ebdd;white-space:pre-wrap}
+#viewer{display:none}#status{color:#386d5a;font-size:12px;margin:0;padding:6px 16px;background:#143332}
+iframe{display:block;border:0;background:white;width:100%;height:calc(100dvh - 112px);min-height:560px}
+body.full header{position:fixed;z-index:3;top:0;left:0;right:0;height:60px;min-height:60px;padding:7px 10px}body.full header h1{font-size:14px}body.full header .sub{display:none}
+body.full #status{display:none}body.full iframe{position:fixed;inset:60px 0 0;height:calc(100dvh - 60px);z-index:2}
+@media(max-width:640px){header{align-items:flex-start;flex-direction:column;padding:12px 14px}.buttons{width:100%}.buttons button,.buttons .link{flex:1;text-align:center}iframe{height:calc(100dvh - 156px)}body.full header{flex-direction:row;align-items:center}body.full header .buttons{width:auto}body.full header .link{display:none}}
+</style>
+</head>
+<body>
+<header>
+<div><h1>VowGarden 1.3 — Wedding Planner</h1><div class="sub">Planner ślubny • Podgląd prywatny • Android i iPhone</div></div>
+<div class="buttons"><a class="link" href="./">Panel Etsy</a><button id="fullBtn" type="button">Pełny ekran</button></div>
+</header>
+<section id="gate">
+<div class="panel">
+<h2 style="margin-top:0">Otwórz VowGarden Wedding Planner</h2>
+<p class="muted">To prywatna wersja testowa nowego organizera ślubnego. Nie została jeszcze opublikowana na Etsy. Zaloguj się tym samym kontem co do panelu TidyBid Hub. Nie używaj hasła do Etsy.</p>
+<form id="loginForm" hidden>
+<label for="email">Adres e-mail</label><input id="email" type="email" autocomplete="username" placeholder="Twój e-mail" required>
+<label for="password">Hasło do TidyBid Hub</label><input id="password" type="password" autocomplete="current-password" required>
+<button class="primary" type="submit">Zaloguj i otwórz aplikację</button>
+</form>
+<button class="primary" id="openBtn" type="button">Otwórz VowGarden</button>
+<div id="message" role="status">Sprawdzam zapisane logowanie…</div>
+<p class="muted">Dane próbnych wycen zapisują się lokalnie w przeglądarce. Nie są wysyłane na Etsy. Zalecam używać wyłącznie danych testowych.</p>
+</div>
+</section>
+<div id="viewer"><p id="status">Ładowanie oryginalnej aplikacji…</p><iframe id="appFrame" title="TidyBid UK Offline Cleaning Quote Builder" sandbox="allow-scripts allow-same-origin allow-forms allow-downloads allow-modals" referrerpolicy="no-referrer"></iframe></div>
+<script>
+(()=>{
+'use strict';
+const URL_BASE='https://zekvdohbvowzterpfvxo.supabase.co';
+const KEY='sb_publishable_D2mx4zjyafTGDWbHfPvaAQ_e8gqOFk2';
+const SESSION_KEY='tidybid-auth-2026';
+const ENDPOINT=URL_BASE+'/functions/v1/vowgarden-private-preview-v13';
+const $=id=>document.getElementById(id);
+let session=null,loaded=false;
+function message(s){$('message').textContent=s;}
+function save(s){session=s;if(s)localStorage.setItem(SESSION_KEY,JSON.stringify(s));else localStorage.removeItem(SESSION_KEY);}
+function expiration(s){return s.expires_at||Math.floor(Date.now()/1000)+(s.expires_in||3600);}
+async function token(){
+ if(!session?.access_token)throw Error('Zaloguj się do panelu.');
+ if(expiration(session)*1000>Date.now()+60000)return session.access_token;
+ if(!session.refresh_token)throw Error('Sesja wygasła. Zaloguj się ponownie.');
+ const res=await fetch(URL_BASE+'/auth/v1/token?grant_type=refresh_token',{
+ method:'POST',headers:{apikey:KEY,'Content-Type':'application/json'},
+ body:JSON.stringify({refresh_token:session.refresh_token})});
+ const data=await res.json();
+ if(!res.ok||!data.access_token)throw Error('Sesja wygasła. Zaloguj się ponownie.');
+ save({...data,expires_at:expiration(data)});
+ return session.access_token;
+}
+async function launch(){
+ if(loaded)return;
+ $('openBtn').disabled=true;
+ message('Pobieranie prywatnego podglądu…');
+ try{
+ const jwt=await token();
+ const res=await fetch(ENDPOINT,{method:'GET',headers:{apikey:KEY,Authorization:'Bearer '+jwt},cache:'no-store'});
+ const data=await res.json();
+ if(!res.ok)throw Error(data.error||'Błąd pobierania '+res.status);
+ if(typeof data.html!=='string'||!data.html.toLowerCase().includes('<html'))throw Error('Serwer nie zwrócił aplikacji.');
+ // Keep the original application in the top-level document on iPhone.
+ // window.print and navigator.share can be blocked inside iframe.
+ loaded=true;
+ document.open();
+ document.write(data.html);
+ document.close();
+ return;
+ }catch(err){
+ message('Nie udało się otworzyć: '+err.message);
+ $('loginForm').hidden=false;
+ }finally{if(document.getElementById('openBtn'))document.getElementById('openBtn').disabled=false;}
+}
+$('openBtn').addEventListener('click',launch);
+$('loginForm').addEventListener('submit',async e=>{
+ e.preventDefault();
+ message('Logowanie do TidyBid Hub…');
+ try{
+  const email=$('email').value.trim(),password=$('password').value;
+  const res=await fetch(URL_BASE+'/auth/v1/token?grant_type=password',{
+    method:'POST',headers:{apikey:KEY,'Content-Type':'application/json'},
+    body:JSON.stringify({email,password})});
+  const data=await res.json();
+  if(!res.ok||!data.access_token)throw Error(data.error_description||data.msg||data.error||'Nieprawidłowe dane logowania.');
+  $('password').value='';
+  save({...data,expires_at:expiration(data)});
+  await launch();
+ }catch(err){message('Logowanie: '+err.message);}
+});
+$('fullBtn').addEventListener('click',()=>{
+ document.body.classList.toggle('full');
+ $('fullBtn').textContent=document.body.classList.contains('full')?'Zamknij pełny ekran':'Pełny ekran';
+});
+try{const old=localStorage.getItem(SESSION_KEY);if(old)session=JSON.parse(old);}
+catch{}
+if(session?.access_token){message('Konto rozpoznane — wybierz „Otwórz aplikację do testów”.');launch();}
+else{$('loginForm').hidden=false;message('Zaloguj się, aby otworzyć prywatny podgląd.');}
+})();
+</script>
+</body></html>
