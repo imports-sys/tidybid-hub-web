@@ -1,0 +1,25 @@
+{
+  "name": "VowGarden Wedding Planner",
+  "short_name": "VowGarden",
+  "description": "Wedding planner for guests, budget, seating, suppliers and encrypted online backups",
+  "start_url": "./",
+  "scope": "./",
+  "id": "https://imports-sys.github.io/tidybid-hub-web/vowgarden/",
+  "display": "standalone",
+  "background_color": "#fbf5f7",
+  "theme_color": "#c87883",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
