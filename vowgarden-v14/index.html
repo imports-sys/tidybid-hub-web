@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#c87883">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="apple-touch-icon" href="./icon-192.png">
+<title>VowGarden 1.4 | Secure Wedding Planner</title>
+<style>
+:root{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:#4b3945;background:#faf4f4}
+*{box-sizing:border-box}
+body{margin:0;min-height:100dvh;display:grid;place-items:center;padding:22px;background:radial-gradient(ellipse at top right,#f0dce9,transparent 42%),linear-gradient(145deg,#fff9f8,#f7eef1)}
+main{width:min(100%,550px);background:#fff;border:1px solid #ead9dc;border-radius:24px;box-shadow:0 16px 60px #76555b18;padding:clamp(22px,5vw,37px)}
+small{letter-spacing:.17em;color:#a66b85;font-size:11px;font-weight:850}h1{font-family:Georgia,serif;font-size:clamp(29px,7vw,39px);font-weight:500;margin:18px 0 14px}p{color:#796b76;font-size:14px;line-height:1.7}
+label{display:block;margin-top:23px;font-size:13px;font-weight:750}
+input{display:block;width:100%;padding:15px;margin:9px 0 0;min-height:50px;border:1px solid #d9c7cc;border-radius:11px;background:white;color:#47333c;font-size:16px;letter-spacing:.05em}
+button{display:block;width:100%;border:0;border-radius:11px;background:#aa6980;color:white;font-size:15px;font-weight:800;min-height:48px;cursor:pointer;margin-top:14px}
+button:disabled{opacity:.6;cursor:wait}
+.status{margin-top:16px;min-height:1.5em;color:#8f4b68;font-size:13px;line-height:1.6}
+.footer{border-top:1px solid #eee2e7;padding-top:17px;margin-top:25px}
+.footer p{font-size:12px;margin:5px 0}
+.loading{display:none}
+</style>
+</head>
+<body>
+<main id="gate">
+<small>♡ VOWGARDEN WEDDING PLANNER · VERSION 1.4</small>
+<h1>Your wedding, beautifully organised.</h1>
+<p>Enter the unique activation code sent to you by the Etsy seller after purchase. Each licence supports up to <strong>two installations</strong>.</p>
+<form id="activation-form">
+<label for="license-code">Your unique VowGarden licence code</label>
+<input id="license-code" placeholder="VG14-XXXXXXXX-XXXXXXXX-XXXXXXXX-XXXXXXXX" autocomplete="off" autocorrect="off" spellcheck="false" required>
+<button type="submit" id="activate">Activate wedding planner</button>
+</form>
+<div class="status" id="status" role="status">Checking this device…</div>
+<section class="footer">
+<p><b>iPhone:</b> Safari → Share → Add to Home Screen.</p>
+<p><b>Android:</b> Chrome → Install app / Add to Home screen.</p>
+<p><b>Offline:</b> core planning runs offline for up to seven days after a successful online licence check. Reconnect to renew. Export JSON backups regularly.</p>
+<p><b>Privacy:</b> your planning data stays on this device unless you explicitly enable encrypted cloud backup.</p>
+<p><b>Need a code?</b> Contact your seller from your Etsy purchase order. This is not an App Store download.</p>
+</section>
+</main>
+<script>
+(() => {
+"use strict";
+const API="https://zekvdohbvowzterpfvxo.supabase.co/functions/v1/vowgarden-license-v14";
+const OFFLINE_MS=7*24*60*60*1000;
+const $=id=>document.getElementById(id);
+const message=s=>{$("status").textContent=s};
+const toHex=bytes=>Array.from(bytes,x=>x.toString(16).padStart(2,"0")).join("");
+const randomSecret=()=>toHex(crypto.getRandomValues(new Uint8Array(32)));
+const codeOf=s=>String(s||"").replace(/[^A-Z0-9]/gi,"").toUpperCase();
+function storage(method,obj){
+ return new Promise((resolve,reject)=>{
+  const req=indexedDB.open("VowGardenLicenceV14",1);
+  req.onupgradeneeded=()=>{if(!req.result.objectStoreNames.contains("registry"))req.result.createObjectStore("registry")};
+  req.onerror=()=>reject(req.error||Error("Could not open secure local storage"));
+  req.onsuccess=()=>{
+   const db=req.result, tx=db.transaction("registry",method==="get"?"readonly":"readwrite");
+   const op=method==="get"?tx.objectStore("registry").get("device"):tx.objectStore("registry").put(obj,"device");
+   op.onsuccess=()=>resolve(op.result);
+   op.onerror=()=>reject(op.error);
+   tx.oncomplete=()=>db.close();
+  };
+ });
+}
+async function credentials(){
+ const previous=await storage("get");
+ if(previous&&previous.deviceId&&previous.sessionSecret)return previous;
+ const value={deviceId:crypto.randomUUID(),sessionSecret:randomSecret(),payloadKey:null,checkedAt:0};
+ await storage("put",value);
+ return value;
+}
+async function callServer(action,record,licenseCode){
+ const payload={action:action,deviceId:record.deviceId,sessionSecret:record.sessionSecret};
+ if(action==="activate")payload.licenseCode=licenseCode;
+ const response=await fetch(API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload),cache:"no-store",mode:"cors"});
+ const data=await response.json();
+ if(!response.ok||!data.ok){const err=Error(data.error||"activation_failed");err.serverRejected=response.status===403;throw err;}
+ if(!/^[a-f0-9]{64}$/i.test(data.payloadKey))throw Error("Invalid server response");
+ return data;
+}
+async function openApp(record){
+ if(!record.payloadKey||!/^[a-f0-9]{64}$/i.test(record.payloadKey))throw Error("Please activate your copy");
+ message("Opening your wedding planner…");
+ const response=await fetch("./payload.bin");
+ if(!response.ok)throw Error("App files are unavailable. Connect to the internet once and try again.");
+ const binary=new Uint8Array(await response.arrayBuffer());
+ const bytes=new Uint8Array(record.payloadKey.match(/.{2}/g).map(h=>parseInt(h,16)));
+ const key=await crypto.subtle.importKey("raw",bytes,{name:"AES-GCM"},false,["decrypt"]);
+ let plain;
+ try{plain=await crypto.subtle.decrypt({name:"AES-GCM",iv:binary.slice(0,12)},key,binary.slice(12))}
+ catch{throw Error("App verification failed. Reconnect for a fresh copy.")}
+ const html=new TextDecoder().decode(plain);
+ if(!html.includes("VowGarden Cloud Backup v1")||!html.includes("vgCurrencyChooser"))throw Error("App integrity check failed.");
+ document.open();document.write(html);document.close();
+}
+function errorLabel(code){
+ const labels={
+  invalid_license:"This licence code is not valid. Check the message from your Etsy seller.",
+  device_limit:"The two-device limit has been reached. Ask your Etsy seller to free a device.",
+  license_revoked:"This licence has been disabled. Contact the Etsy seller.",
+  device_revoked:"This device was disabled for this licence. Contact the Etsy seller.",
+  not_activated:"This device has not been activated. Enter your personal licence code.",
+  service_unavailable:"Licence service is temporarily unavailable. Try again."
+ };
+ return labels[code]||"Activation could not be completed: "+String(code).slice(0,70);
+}
+async function load(){
+ if("serviceWorker" in navigator)navigator.serviceWorker.register("./sw.js").catch(()=>{});
+ try{
+  const record=await credentials();
+  if(!record.payloadKey||!record.checkedAt){message("Enter the unique code supplied by the seller.");return;}
+  try{
+   const server=await callServer("check",record);
+   record.checkedAt=Date.now();record.payloadKey=server.payloadKey;
+   await storage("put",record);
+   await openApp(record);
+  }catch(e){
+   if(e.serverRejected){
+    record.payloadKey=null;record.checkedAt=0;await storage("put",record);
+    message(errorLabel(e.message));return;
+   }
+   if(Date.now()-record.checkedAt<OFFLINE_MS){
+    message("Using saved offline activation…");
+    await openApp(record);
+   }else message("Internet connection is required to renew your 7-day offline licence.");
+  }
+ }catch(e){message("Secure storage is unavailable: "+e.message)}
+}
+$("activation-form").addEventListener("submit",async ev=>{
+ ev.preventDefault();
+ const button=$("activate"),code=codeOf($("license-code").value);
+ if(!/^VG14[A-F0-9]{32}$/.test(code)){message("Enter your complete unique code beginning with VG14.");return;}
+ button.disabled=true;message("Checking your licence and device count…");
+ try{
+  const record=await credentials();
+  const data=await callServer("activate",record,code);
+  record.payloadKey=data.payloadKey;record.checkedAt=Date.now();
+  await storage("put",record);
+  await openApp(record);
+ }catch(e){message(errorLabel(e.message));button.disabled=false}
+});
+load();
+})();
+</script>
+</body>
+</html>
