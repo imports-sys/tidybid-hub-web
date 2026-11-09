@@ -1,57 +1,19 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#c87883"><link rel="manifest" href="./manifest.webmanifest"><link rel="apple-touch-icon" href="./icon-192.png"><title>VowGarden | Activate Wedding Planner</title>
-<style>
-*{box-sizing:border-box}body{margin:0;min-height:100dvh;padding:25px;background:radial-gradient(circle at top right,#f4d2df,transparent 38%),linear-gradient(145deg,#fff7f9,#f8f1f1);color:#49343d;font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;display:flex;align-items:center;justify-content:center}
-main{max-width:510px;width:100%;background:white;border:1px solid #eacfd9;border-radius:25px;padding:29px 24px;box-shadow:0 20px 65px #663e5322}
-mark{background:#f4d8e2;color:#7f455f;padding:7px 12px;border-radius:30px;font-size:12px;font-weight:700}.brand{letter-spacing:.15em;font-size:14px;color:#a46887;font-weight:900}h1{font-size:29px;line-height:1.15;margin:21px 0 12px}p{color:#6a5362;font-size:14px;line-height:1.7;margin:12px 0 20px}
-label{display:block;font-weight:700;font-size:14px;margin:12px 0 6px}input{display:block;width:100%;border:1px solid #dcbeca;border-radius:12px;padding:14px;font-size:16px;min-height:52px;background:#fff;color:#503744;letter-spacing:.08em}button{margin-top:13px;border:0;background:linear-gradient(120deg,#97607d,#d48d9e);color:white;font-weight:800;font-size:15px;padding:14px 18px;border-radius:12px;min-height:50px;width:100%;cursor:pointer}button:disabled{opacity:.55}.status{min-height:1.5em;color:#7e3852;font-size:13px;line-height:1.5}.notice{border-top:1px solid #f2e2e9;margin-top:22px;padding-top:12px}.notice p{font-size:12px;margin:6px 0 9px}
-</style></head><body><main><div class="brand">♡ VOWGARDEN</div><h1>Your wedding, beautifully organised.</h1><mark>iPhone · Android · Laptop</mark>
-<p>Enter the activation code provided in your Etsy download (<strong>ACTIVATION_CODE.txt</strong>). You don't need your own web hosting.</p>
-<form id="activate-form"><label for="activation-code">Activation code</label><input id="activation-code" type="text" autocapitalize="characters" autocomplete="off" spellcheck="false" placeholder="Paste your code here" required><button type="submit" id="activate-button">Activate & Open Planner</button></form>
-<div class="status" id="status" role="status">Checking device activation…</div>
-<div class="notice"><p><strong>Install:</strong> iPhone Safari → Share → Add to Home Screen. Android Chrome → ⋮ → Install app or Add to Home screen.</p><p><strong>Offline:</strong> after first online activation, you can use the planner offline when its cached files remain on the device. The optional cloud backup requires internet and a separate free sign-in; a recovery phrase encrypts your private wedding details.</p><p>Use Export Backup (JSON) regularly. Wedding plans are not automatically shared unless you enable cloud backup.</p></div></main>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<meta http-equiv="refresh" content="2;url=../vowgarden-v14/">
+<title>VowGarden has moved to private licences</title>
+<style>body{font-family:system-ui,-apple-system,sans-serif;background:#fff7f8;color:#553e4b;display:grid;min-height:95vh;place-items:center;text-align:center;padding:18px}main{max-width:460px;background:white;border:1px solid #e4cbd4;border-radius:20px;padding:30px}a{color:#914b6d;font-weight:bold}</style>
+</head><body><main>
+<h1>VowGarden 1.4</h1>
+<p>For your security, VowGarden now uses a unique licence for each Etsy purchase.</p>
+<p>The old shared activation code is retired. Your wedding planning data remains in this browser until you clear it.</p>
+<p><a href="../vowgarden-v14/">Continue to the new VowGarden app</a></p>
+</main>
 <script>
-(()=>{
-'use strict';
-const $=id=>document.getElementById(id);
-const status=text=>{const el=$('status');if(el)el.textContent=text;};
-function unhex(code){const s=String(code).replace(/[^0-9a-f]/gi,'').toLowerCase();if(s.length!==64)throw Error('Enter the 64-character code from ACTIVATION_CODE.txt');return Uint8Array.from(s.match(/.{2}/g),h=>parseInt(h,16));}
-function db(mode,thing){
- return new Promise((resolve,reject)=>{
-  const request=indexedDB.open('VowGardenActivationV1',1);
-  request.onupgradeneeded=()=>{if(!request.result.objectStoreNames.contains('credentials'))request.result.createObjectStore('credentials');};
-  request.onerror=()=>reject(request.error);
-  request.onsuccess=()=>{
-   const base=request.result,tx=base.transaction('credentials',mode==='get'?'readonly':'readwrite');
-   const req=mode==='get'?tx.objectStore('credentials').get('app-key'):tx.objectStore('credentials').put(thing,'app-key');
-   req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error);
-   tx.oncomplete=()=>base.close();
-  };
- });
-}
-async function openApp(key){
- status('Opening your planner securely…');
- const response=await fetch('./payload.bin');
- if(!response.ok)throw Error('Application files are unavailable. Please reconnect to the internet and try again.');
- const payload=new Uint8Array(await response.arrayBuffer());
- if(payload.length<300||!crypto.subtle)throw Error('Secure storage is not available in this browser.');
- let bytes;
- try{bytes=await crypto.subtle.decrypt({name:'AES-GCM',iv:payload.slice(0,12)},key,payload.slice(12));}
- catch{throw Error('Incorrect activation code. Please check the purchased ZIP.');}
- const app=new TextDecoder().decode(bytes);
- if(!app.includes('VowGarden Cloud Backup v1')||!app.includes('vgCurrencyChooser'))throw Error('Application package failed validation.');
- await db('put',key);
- document.open();document.write(app);document.close();
-}
-$('activate-form').addEventListener('submit',async e=>{
- e.preventDefault();const btn=$('activate-button');btn.disabled=true;
- try{
-  const raw=unhex($('activation-code').value);
-  const key=await crypto.subtle.importKey('raw',raw,{name:'AES-GCM'},false,['decrypt']);
-  await openApp(key);
- }catch(err){status(err.message);btn.disabled=false;}
-});
-if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});
-db('get').then(key=>{if(key)return openApp(key);status('Enter your activation code from Etsy.')}).catch(e=>status('Enter your activation code to continue.'));
-})();
-</script></body></html>
+if("serviceWorker" in navigator)navigator.serviceWorker.register("./sw.js").catch(()=>{});
+setTimeout(()=>location.replace("../vowgarden-v14/"),1300);
+</script>
+</body></html>
