@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="en">
 <head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-cM+1aGJqHd/peTXYy42QCEbQxY4CA8JB/Gv3xeC7vog=' 'sha256-fGsWJoAbxlJPI5N76LPVAp0Nl8qshEtBlbT6cuAVwu0='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' https://zekvdohbvowzterpfvxo.supabase.co; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'">
+<meta name="referrer" content="no-referrer">
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#faf6f2">
 <title>VowGarden — Wedding Planner 1.5 Easy</title>
 <style>
@@ -125,7 +127,7 @@ $('#modalBack').addEventListener('click',e=>{if(e.target===$('#modalBack'))close
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 $('#importFile').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;try{const raw=await f.text(),d=sane(JSON.parse(raw));if(!confirm('Replace your current wedding plan with this backup?'))return;state=d;save();tab='dashboard';closeModal();render();toast('Backup restored ✓')}catch(err){toast('Invalid backup file')}finally{e.target.value=''}});
 // Add a small data management section to Settings modal, not hidden behind extra navigation.
-const originalOpen=openModal;openModal=function(kind,id){originalOpen(kind,id);if(kind==='settings'){$('#modalFields').insertAdjacentHTML('beforeend',`<div class="field full" style="border-top:1px solid #eadfe0;margin-top:5px;padding-top:15px"><label>DATA & DEMO</label><div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="btn" data-action="backup">↓ Backup JSON</button><button type="button" class="btn" data-action="import">↑ Restore backup</button><button type="button" class="btn" data-action="demo">✿ Sample data</button><button type="button" class="btn danger" data-action="fresh">Start fresh</button></div><p class="muted small" style="line-height:1.5;margin-top:7px">Your data stays on this browser. This app does not sync automatically between devices.</p></div>`)}};
+const originalOpen=openModal;openModal=function(kind,id){originalOpen(kind,id);if(kind==='settings'){$('#modalFields').insertAdjacentHTML('beforeend',`<div class="field full" style="border-top:1px solid #eadfe0;margin-top:5px;padding-top:15px"><label>DATA & DEMO</label><div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="btn" data-action="backup">↓ Backup JSON</button><button type="button" class="btn" data-action="import">↑ Restore backup</button><button type="button" class="btn" data-action="demo">✿ Sample data</button><button type="button" class="btn danger" data-action="fresh">Start fresh</button></div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"><button type="button" class="btn danger" data-vgprivacy="local">Erase this device data</button><button type="button" class="btn danger" data-vgprivacy="cloud">Delete encrypted cloud copy</button></div><p class="muted small" style="line-height:1.5;margin-top:8px">Privacy: Guest names, contacts and allergy notes are kept on this device by default. Optional cloud backup sends client-side encrypted data to the account you choose. A separate account is needed for cloud backups. Deleting a cloud copy does not erase copies on other devices or downloaded JSON files.</p><p class="muted small" style="line-height:1.5;margin-top:7px">Your plan stays in this browser unless you sign in and enable encrypted cloud backup. Clear browsing data or remove this app and local data may be lost. Always export your own JSON backups. Names and allergy notes are sensitive; only enter information you are authorised to use.</p></div>`)}};
 // VowGarden 1.1 / 1.2 — non-destructive enhancements.
 // Existing key, guest/budget fields, backups and current data preserved.
 const VG_VERSION="1.2";
@@ -549,7 +551,7 @@ async function vgResolve(prefer){
  vgConflict=null;vgMeta={version:Number(row.version||0),dirty:true};vgStoreMeta();
  await vgUpload(Number(row.version||0),row.encrypted_payload?row:null,true);
 }
-async function vgInitializeUser(data){
+async function vgInitializeUser(data){vgCloudPause=false;
  if(!data?.access_token||!data.user?.id)throw Error('You need to confirm your email and sign in.');
  vgSession={...data,expires_at:Math.floor(Date.now()/1000)+(data.expires_in||3600)};
  localStorage.setItem(vgSessionStorage,JSON.stringify(vgSession));
@@ -623,6 +625,80 @@ setInterval(()=>{if(!document.hidden)vgScheduleSync(0);},45000);
   await vgInitializeUser(vgSession);
  }catch(e){vgSession=null;vgUser=null;vgCryptoKey=null;vgSetCloudStatus('Sign in again to enable cloud backups',false);}
 })();
+
+
+// Privacy controls. These are deliberately NEVER run without the customer's action.
+// They operate only on the currently used VowGarden browser and authenticated account.
+async function vgPrivacyForgetAccount(scope='local'){
+ clearTimeout(vgCloudTimer);
+ vgCloudPause=true;
+ const previousUser=vgUser?.id;
+ const previousToken=vgSession?.access_token;
+ vgSession=null;vgUser=null;vgCryptoKey=null;vgMeta=null;vgConflict=null;
+ try{if(previousUser)await vgKeyStore('delete',previousUser);}catch(e){}
+ if(previousUser)localStorage.removeItem('vowgarden-cloud-meta-v1-'+previousUser);
+ localStorage.removeItem(vgSessionStorage);
+ if(previousToken){
+  try{await fetch(vgApi+'/auth/v1/logout?scope='+encodeURIComponent(scope),{
+   method:'POST',headers:{apikey:vgPub,Authorization:'Bearer '+previousToken}
+  });}catch(e){}
+ }
+ vgSetCloudStatus('Signed out. Only this device keeps its local plan.',false);
+ vgUpdateCloudUI();
+}
+document.addEventListener('click',async function(e){
+ const privacyButton=e.target.closest('[data-vgprivacy]');
+ if(!privacyButton)return;
+ e.preventDefault();
+ e.stopPropagation();
+ const action=privacyButton.dataset.vgprivacy;
+ if(vgBusy){
+  toast('Cloud sync is busy. Try again in a moment.');
+  return;
+ }
+ if(action==='local'){
+  if(!confirm('Erase the wedding plan from THIS browser? Guest details, allergies, tables and budget will be erased here. Cloud backups and downloaded files are NOT deleted. Export JSON first if needed.'))return;
+  if(prompt('Type DELETE to confirm erasing this device data:')!=='DELETE')return;
+  vgCloudPause=true;clearTimeout(vgCloudTimer);
+  await vgPrivacyForgetAccount();
+  state=empty();tab='dashboard';search='';guestFilter='All';selectedSeatGuest=null;
+  vgOldSave();closeModal();render();
+  toast('This browser’s wedding plan is erased. Cloud and exported copies may still exist.');
+  return;
+ }
+ if(action==='cloud'){
+  if(!vgUser||!vgSession){
+   toast('Sign in to cloud backup to delete its encrypted copy.');
+   return;
+  }
+  if(!confirm('Permanently delete your encrypted VowGarden cloud snapshot? Your local plan will stay on this device. Other signed-in devices can re-upload a copy later; sign them out too.'))return;
+  if(prompt('Type DELETE to permanently delete the CLOUD copy:')!=='DELETE')return;
+  vgCloudPause=true;clearTimeout(vgCloudTimer);vgBusy=true;
+  try{
+   const id=vgUser.id;
+   const endpoint='vowgarden_cloud_snapshots?owner_id=eq.'+encodeURIComponent(id);
+   await vgRequest('DELETE',endpoint,null,'return=representation');
+   const remaining=await vgGetRemote();
+   if(remaining)throw Error('Cloud copy still exists. No success was confirmed.');
+   await vgPrivacyForgetAccount('global');
+   vgSetCloudStatus('Cloud backup removed for this account. Other devices may still have copies.',false);
+   vgUpdateCloudUI();
+   toast('Cloud snapshot deleted. This device remains local-only.');
+  }catch(err){
+   vgCloudPause=false;
+   vgSetCloudStatus('Cloud deletion NOT confirmed: '+err.message,false);
+   vgUpdateCloudUI();
+  }finally{vgBusy=false;}
+ }
+},true);
+// Reject excessively large imported backups before reading/parsing them.
+document.getElementById('importFile').addEventListener('change',function(e){
+ const file=e.target.files?.[0];
+ if(file&&file.size>5*1024*1024){
+  e.stopImmediatePropagation();e.preventDefault();e.target.value='';
+  toast('Backup exceeds 5 MB. The file was not imported.');
+ }
+},true);
 
 render();
 })();
