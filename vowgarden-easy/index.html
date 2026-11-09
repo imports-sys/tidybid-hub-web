@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-cM+1aGJqHd/peTXYy42QCEbQxY4CA8JB/Gv3xeC7vog=' 'sha256-fGsWJoAbxlJPI5N76LPVAp0Nl8qshEtBlbT6cuAVwu0='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' https://zekvdohbvowzterpfvxo.supabase.co; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-O9hbu7mHQQaJRN9ex29/0EIw8srgAtaLp7VKPnDTEes=' 'sha256-fGsWJoAbxlJPI5N76LPVAp0Nl8qshEtBlbT6cuAVwu0='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' https://zekvdohbvowzterpfvxo.supabase.co; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'">
 <meta name="referrer" content="no-referrer">
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#faf6f2">
 <title>VowGarden — Wedding Planner 1.5 Easy</title>
@@ -127,7 +127,7 @@ $('#modalBack').addEventListener('click',e=>{if(e.target===$('#modalBack'))close
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 $('#importFile').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;try{const raw=await f.text(),d=sane(JSON.parse(raw));if(!confirm('Replace your current wedding plan with this backup?'))return;state=d;save();tab='dashboard';closeModal();render();toast('Backup restored ✓')}catch(err){toast('Invalid backup file')}finally{e.target.value=''}});
 // Add a small data management section to Settings modal, not hidden behind extra navigation.
-const originalOpen=openModal;openModal=function(kind,id){originalOpen(kind,id);if(kind==='settings'){$('#modalFields').insertAdjacentHTML('beforeend',`<div class="field full" style="border-top:1px solid #eadfe0;margin-top:5px;padding-top:15px"><label>DATA & DEMO</label><div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="btn" data-action="backup">↓ Backup JSON</button><button type="button" class="btn" data-action="import">↑ Restore backup</button><button type="button" class="btn" data-action="demo">✿ Sample data</button><button type="button" class="btn danger" data-action="fresh">Start fresh</button></div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"><button type="button" class="btn danger" data-vgprivacy="local">Erase this device data</button><button type="button" class="btn danger" data-vgprivacy="cloud">Delete encrypted cloud copy</button></div><p class="muted small" style="line-height:1.5;margin-top:8px">Privacy: Guest names, contacts and allergy notes are kept on this device by default. Optional cloud backup sends client-side encrypted data to the account you choose. A separate account is needed for cloud backups. Deleting a cloud copy does not erase copies on other devices or downloaded JSON files.</p><p class="muted small" style="line-height:1.5;margin-top:7px">Your plan stays in this browser unless you sign in and enable encrypted cloud backup. Clear browsing data or remove this app and local data may be lost. Always export your own JSON backups. Names and allergy notes are sensitive; only enter information you are authorised to use.</p></div>`)}};
+const originalOpen=openModal;openModal=function(kind,id){originalOpen(kind,id);if(kind==='settings'){$('#modalFields').insertAdjacentHTML('beforeend',`<div class="field full" style="border-top:1px solid #eadfe0;margin-top:5px;padding-top:15px"><label>DATA & DEMO</label><div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="btn" data-action="backup">↓ Backup JSON</button><button type="button" class="btn" data-action="import">↑ Restore backup</button><button type="button" class="btn" data-action="demo">✿ Sample data</button><button type="button" class="btn danger" data-action="fresh">Start fresh</button></div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"><button type="button" class="btn danger" data-vgprivacy="local">Erase this device data</button><button type="button" class="btn danger" data-vgprivacy="cloud">Delete encrypted cloud copy</button></div><p class="muted small" style="line-height:1.5;margin-top:8px">Privacy: Guest names, contacts and allergy notes are kept on this device by default. Allergy information may reveal health details: enter only the minimum required and only when you have an appropriate lawful basis and have informed the guest. Exported JSON backups are NOT encrypted. To request account closure or raise a privacy complaint, contact TidyBidUK through Etsy Messages; deleting a cloud snapshot alone does not close your login account. Optional cloud backup sends client-side encrypted data to the account you choose. A separate account is needed for cloud backups. Deleting a cloud copy does not erase copies on other devices or downloaded JSON files.</p><p class="muted small" style="line-height:1.5;margin-top:7px">Your plan stays in this browser unless you sign in and enable encrypted cloud backup. Clear browsing data or remove this app and local data may be lost. Always export your own JSON backups. Names and allergy notes are sensitive; only enter information you are authorised to use.</p></div>`)}};
 // VowGarden 1.1 / 1.2 — non-destructive enhancements.
 // Existing key, guest/budget fields, backups and current data preserved.
 const VG_VERSION="1.2";
@@ -138,7 +138,7 @@ if(!Array.isArray(state.tables)){
 }
 schema.guest.fields.push(
  ['plusName','Plus-one name (optional)','text'],
- ['allergies','Allergies or dietary restrictions','textarea'],
+ ['allergies','Allergies or dietary needs (optional — only with permission)','textarea'],
  ['group','Family or group','text']
 );
 schema.budget.fields.push(
@@ -562,6 +562,7 @@ async function vgInitializeUser(data){vgCloudPause=false;
 }
 async function vgLogin(email,password,create){
  if(!navigator.onLine)throw Error('Internet needed for sign-in.');
+ if(create && password.length<12)throw Error('New cloud accounts require a password of at least 12 characters. Use a unique password.');
  const url=create?'/auth/v1/signup':'/auth/v1/token?grant_type=password';
  const r=await fetch(vgApi+url,{method:'POST',headers:{apikey:vgPub,'Content-Type':'application/json'},body:JSON.stringify({email,password})});
  const data=await r.json();
