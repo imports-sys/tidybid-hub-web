@@ -1,0 +1,22 @@
+{
+  "name": "VowGarden Wedding Planner 1.5 Easy",
+  "short_name": "VowGarden",
+  "description": "No-code wedding planning app. Download, open and start planning.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#faf6f2",
+  "theme_color": "#c87883",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

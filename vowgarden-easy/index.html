@@ -1,0 +1,633 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#faf6f2">
+<title>VowGarden — Wedding Planner 1.5 Easy</title>
+<style>
+:root{--ink:#302c36;--muted:#7f7a85;--rose:#c87883;--rose2:#f5e3e1;--sage:#648c80;--mint:#e7f1e9;--lav:#eee8f6;--paper:#fffdfb;--line:#e9e1df;--bg:#f9f6f3;--shadow:0 12px 34px #4431420d;font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink)}*{box-sizing:border-box}body{margin:0;background:var(--bg);min-height:100vh}button,input,select,textarea{font:inherit}button{cursor:pointer}a{color:inherit}h1,h2,h3,p{margin-top:0}h1,h2,.serif{font-family:Georgia,"Times New Roman",serif;font-weight:500}h1{font-size:clamp(33px,4.5vw,55px);line-height:1.12;letter-spacing:-1.4px}h2{font-size:clamp(24px,2.8vw,31px);letter-spacing:-.7px;margin-bottom:7px}.small{font-size:12px}.muted{color:var(--muted)}.app{display:grid;grid-template-columns:245px minmax(0,1fr);max-width:1600px;min-height:100vh;margin:auto}.side{background:#fffaf7;border-right:1px solid var(--line);padding:29px 21px;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;gap:24px}.logo{display:flex;align-items:center;gap:10px;font-family:Georgia,serif;font-size:25px;letter-spacing:-.8px}.mark{display:grid;place-items:center;width:37px;height:37px;border-radius:50% 50% 45% 45%;background:#f3e3de;color:#b56d7b;font-size:25px}.side-sub{letter-spacing:1.9px;color:#ba8995;font-size:10px;margin-top:-17px;padding-left:46px}.nav{display:grid;gap:6px}.nav-btn{border:0;background:transparent;color:#75737b;display:flex;align-items:center;gap:13px;padding:13px 14px;text-align:left;border-radius:13px;font-weight:600;font-size:13px;transition:.15s}.nav-btn .emoji{font-size:18px;width:23px;text-align:center}.nav-btn.active,.nav-btn:hover{background:#f4e8e7;color:#a85769}.side-tip{margin-top:auto;padding:17px;background:#eff3ed;border:1px solid #dde6da;border-radius:17px;font-size:12px;line-height:1.6;color:#587365}.side-tip strong{display:block;margin-bottom:5px;color:#40574b}.side-foot{font-size:11px;color:#99959d;line-height:1.5}.main{padding:28px clamp(18px,3.4vw,54px) 75px;min-width:0}.topbar{display:flex;align-items:center;justify-content:space-between;gap:15px;margin:0 0 27px}.topbar .subline{font-size:12px;letter-spacing:1.2px;text-transform:uppercase;font-weight:700;color:#af8c97}.tools{display:flex;align-items:center;gap:9px;flex-wrap:wrap}.btn{border:1px solid #dfd7db;background:#fff;color:#635f68;padding:11px 16px;border-radius:12px;font-weight:700;font-size:12px;display:inline-flex;justify-content:center;align-items:center;gap:8px;min-height:41px;box-shadow:0 2px 8px #42304308}.btn:hover{border-color:#bb909c}.btn.primary{background:#ae6c7d;color:white;border-color:#ae6c7d}.btn.green{background:#658b7c;border-color:#658b7c;color:white}.btn.ghost{background:transparent;border-color:transparent;box-shadow:none}.btn.danger{color:#ae5163}.hero{display:grid;grid-template-columns:minmax(0,1fr) 245px;position:relative;overflow:hidden;border:1px solid #eddee0;background:linear-gradient(105deg,#f6e5e1 0%,#fff0eb 54%,#e8ece5 100%);min-height:260px;border-radius:25px;padding:32px 35px;box-shadow:var(--shadow);gap:12px}.hero:before{content:"";position:absolute;right:7%;bottom:-85px;border:1px solid #e5bcc4;border-radius:50%;height:260px;width:260px;box-shadow:0 0 0 27px #e6bcc318,0 0 0 60px #e6bcc316}.hero>div{position:relative;z-index:1}.eyebrow{font-size:10px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;color:#aa7786;margin-bottom:13px}.hero h1{margin-bottom:10px;max-width:580px}.hero p{max-width:510px;color:#8f7280;font-size:13px;line-height:1.7}.count{align-self:center;justify-self:center;background:#ffffffb3;backdrop-filter:blur(12px);border:1px solid #fff;padding:26px 25px;text-align:center;border-radius:999px;width:174px;height:174px;display:flex;align-items:center;flex-direction:column;justify-content:center;gap:7px}.count strong{font-family:Georgia,serif;font-weight:normal;font-size:41px;color:#a96175}.count span{font-size:11px;color:#917e83;line-height:1.4}.action-row{margin:21px 0;display:flex;flex-wrap:wrap;gap:9px}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin:22px 0}.stat{background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:17px;padding:18px;min-width:0}.stat small{display:block;color:#8d858e;font-size:11px;margin-bottom:12px}.stat strong{font-size:25px;font-weight:750;letter-spacing:-1px;white-space:nowrap}.stat .foot{font-size:10px;color:#a4a0a3;margin-top:8px}.mini-icon{float:right;font-size:18px;background:#fbefec;border-radius:10px;padding:8px;margin-top:-5px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:28px 0 15px}.section-head p{font-size:12px;color:var(--muted);margin:0}.panel{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:21px;min-width:0;box-shadow:var(--shadow)}.two{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:17px}.panel-title{font-size:13px;font-weight:800;margin-bottom:15px}.line-row{display:flex;gap:15px;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid #f0ebe8;font-size:12px}.line-row:last-child{border:0}.line-row b{font-weight:650}.pill{display:inline-flex;padding:5px 9px;font-size:10px;font-weight:750;border-radius:999px;white-space:nowrap;background:#f6edef;color:#a86677}.pill.green{background:#e8f1e8;color:#477a62}.pill.orange{background:#fff1e1;color:#b07a3a}.pill.gray{background:#eeecec;color:#7f787e}.progress{height:8px;background:#eee8e6;border-radius:20px;overflow:hidden;margin:8px 0}.progress>span{height:100%;background:linear-gradient(90deg,#bd788c,#d9a3a0);display:block;border-radius:20px}.barlist{display:grid;gap:12px}.bar-label{display:flex;justify-content:space-between;gap:10px;font-size:12px}.bar-label span:last-child{font-weight:700}.subheading{color:#85808a;font-size:12px;line-height:1.5}.page-header{display:flex;justify-content:space-between;align-items:end;gap:15px;margin-bottom:22px}.page-header p{margin:3px 0 0;color:var(--muted);font-size:13px}.stack{display:grid;gap:12px}.cardrow{border:1px solid var(--line);background:#fffdfa;border-radius:16px;padding:16px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;min-width:0}.cardrow h3{font-size:14px;margin:0 0 6px;font-weight:750}.cardrow p{font-size:12px;color:#8d8591;line-height:1.5;margin:0}.cardrow .actions{display:flex;gap:5px;flex-shrink:0}.iconbtn{border:1px solid #ece3e4;background:#fff;border-radius:10px;padding:8px;color:#8e7680;min-width:35px}.iconbtn:hover{border-color:#cf8c9d}.meta{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}.cols3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}.empty{padding:40px 20px;text-align:center;color:#948b91;border:1px dashed #e1cfd3;background:#fffcfb;border-radius:18px;font-size:13px;line-height:1.7}.empty .em{font-size:37px;margin-bottom:8px}.search{width:100%;background:white;border:1px solid #e3dadd;border-radius:12px;padding:11px 14px;font-size:13px;min-height:43px;outline:none}.search:focus,.field input:focus,.field select:focus,.field textarea:focus{border-color:#bf8996;box-shadow:0 0 0 3px #cb8a9724}.filters{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:15px}.filter{border:1px solid #e4dce0;background:#fff;border-radius:999px;padding:8px 12px;font-size:12px;color:#8d838e}.filter.active{background:#f4e3e7;color:#985869;border-color:#e7bfc9}.table-box{overflow:auto;border-radius:17px;border:1px solid var(--line);background:white}.data-table{border-collapse:collapse;width:100%;min-width:670px;font-size:12px;text-align:left}.data-table th{padding:13px 15px;color:#96919a;font-weight:700;background:#faf6f4;border-bottom:1px solid var(--line);white-space:nowrap}.data-table td{padding:13px 15px;border-bottom:1px solid #f3eded;color:#68636c}.data-table tr:last-child td{border-bottom:0}.data-table strong{color:#423b44}.data-table .btn{padding:6px 11px;min-height:31px}.tab-note{background:#edf3ed;border:1px solid #dcebdc;padding:12px 14px;color:#617b65;border-radius:12px;font-size:12px;line-height:1.6}.seating-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.seat-card{min-height:160px;background:radial-gradient(circle at 95% 8%,#f1e7ed,transparent 50%),#fffdfc;border:1px solid #eadfe0;border-radius:18px;padding:19px}.seat-card h3{font-family:Georgia,serif;font-size:22px;margin:0 0 12px}.seat-card .names{font-size:12px;line-height:1.8;color:#817883}.seat-card .badge{font-size:10px;background:#e8f0e9;color:#668274;border-radius:12px;padding:4px 8px}.modal-back{position:fixed;inset:0;background:#1d162580;display:none;align-items:center;justify-content:center;padding:17px;z-index:60;backdrop-filter:blur(4px)}.modal-back.open{display:flex}.modal{background:#fffdfc;border:1px solid #fff;border-radius:21px;max-width:580px;width:100%;max-height:calc(100dvh - 32px);overflow:auto;padding:25px;box-shadow:0 28px 100px #1d122d4a}.modal h2{margin:0;font-size:29px}.modal .head{display:flex;justify-content:space-between;align-items:start;gap:15px;margin-bottom:18px}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.field{display:grid;gap:7px;min-width:0}.field.full{grid-column:1/-1}.field label{font-size:11px;font-weight:700;color:#706b73}.field input,.field select,.field textarea{border:1px solid #e3dadd;border-radius:11px;background:white;width:100%;padding:11px 12px;font-size:13px;color:#47414b;outline:none}.field textarea{min-height:80px;resize:vertical}.form-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:21px}.toast{pointer-events:none;position:fixed;bottom:24px;right:24px;z-index:200;box-shadow:0 10px 35px #251d2980;border-radius:12px;background:#30323a;color:white;padding:13px 18px;max-width:350px;font-size:12px;display:none}.toast.show{display:block}.print-only{display:none}.mobile-nav{display:none}.intro-banner{background:#fff5e9;border:1px solid #f0ddc5;border-radius:12px;padding:12px 15px;color:#9b7150;font-size:12px;line-height:1.65;margin-bottom:20px}.badge-dot{display:inline-block;height:8px;width:8px;border-radius:50%;background:#c67b8b;margin-right:6px}body[data-page="dashboard"] .head-intro{display:none}
+@media(max-width:1120px){.app{grid-template-columns:204px minmax(0,1fr)}.side{padding:23px 12px}.main{padding:23px 22px 70px}.hero{grid-template-columns:1fr 170px;padding:26px}.count{width:148px;height:148px}.count strong{font-size:35px}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.two{grid-template-columns:1fr 1fr}}
+@media(max-width:750px){.toast{bottom:88px;left:15px;right:15px;max-width:none;text-align:center}.app{display:block}.side{display:none}.mobile-nav{position:fixed;bottom:0;left:0;right:0;height:74px;background:#fffefaed;border-top:1px solid #eadfe4;z-index:30;display:flex;overflow-x:auto;overscroll-behavior-x:contain;padding:7px 8px max(8px,env(safe-area-inset-bottom));box-shadow:0 -10px 25px #49334b0a}.mobile-nav button{border:0;background:none;min-width:76px;font-size:10px;font-weight:750;color:#a09aa2;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;border-radius:10px}.mobile-nav button.active{color:#af6476;background:#f5e6ea}.mobile-nav .emoji{font-size:21px}.main{padding:19px 15px 110px}.topbar{gap:8px;align-items:flex-start;margin-bottom:15px}.topbar .subline{font-size:10px}.tools{justify-content:flex-end;gap:5px}.tools .btn{font-size:11px;padding:9px;min-height:35px}.hero{grid-template-columns:1fr;gap:14px;padding:27px 25px;min-height:auto}.hero h1{font-size:40px;line-height:1.09}.hero p{font-size:12px}.count{position:relative;justify-self:start;width:auto;height:auto;border-radius:14px;padding:12px 17px;flex-direction:row;gap:10px}.count strong{font-size:27px}.count span{max-width:110px;text-align:left}.stats{gap:10px;margin:14px 0}.stat{padding:14px}.stat strong{font-size:22px}.two,.cols3,.seating-grid{grid-template-columns:1fr}.page-header{align-items:flex-start;flex-wrap:wrap}.page-header .btn{margin-left:auto}.panel{padding:17px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:1}.modal{padding:19px}.form-actions{position:sticky;bottom:-19px;background:#fffdfc;padding:13px 0}.action-row .btn{flex:1}.cardrow{padding:14px}.section-head h2{font-size:26px}}
+@media print{.side,.mobile-nav,.topbar,.action-row,.page-header button,.btn,.iconbtn,.toast,.modal-back,.filters,.intro-banner{display:none!important}.app{display:block}.main{padding:0}.hero{box-shadow:none}.panel,.stat{box-shadow:none}body{background:white}} 
+
+/* VowGarden 1.2: touch-friendly seating, payments and RSVP */
+.vg-actions{display:flex;flex-wrap:wrap;gap:10px;margin:15px 0}
+.vg-alert{background:#fff1e8;border:1px solid #f1d2bd;border-radius:14px;padding:14px 18px;margin:12px 0;color:#913c27;font-size:13px;line-height:1.5}
+.vg-overdue{color:#a43f35;font-weight:700}
+.vg-budget-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px;font-size:13px}
+.vg-budget-grid strong{display:block;font-size:21px;margin-top:6px;color:#4a3843}
+.vg-category-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:12px;margin:12px 0 18px}
+.vg-category{background:var(--paper);padding:14px;border:1px solid var(--line);border-radius:13px;font-size:13px}
+.vg-category>div{font-size:18px;font-weight:700;margin:10px 0}
+.vg-seat-toolbar{padding:13px 16px;margin:10px 0 17px;border-radius:13px;background:#f8eaf0;color:#79516b;font-size:13px;border:1px solid #edccd8}
+.vg-table-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:15px;margin:14px 0}
+.vg-table-card{background:white;border:2px solid #ead8de;border-radius:19px;padding:18px;min-height:320px;box-shadow:var(--shadow)}
+.vg-table-card:focus,.vg-table-card:hover,.vg-unassigned:focus{border-color:#c78099;outline:none}
+.vg-table-over{border-color:#be5b55;background:#fff8f8}
+.vg-table-shape{width:138px;height:138px;border:8px double #d8b4c2;border-radius:50%;background:#fff6f8;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;margin:18px auto;color:#af7086;font-size:42px;font-family:Georgia,serif}
+.vg-table-shape span{font:600 12px system-ui;color:#8e6d79}
+.vg-table-shape.rect{width:160px;height:110px;border-radius:20px}
+.vg-seat-list{display:flex;flex-wrap:wrap;gap:7px}
+.vg-guest-chip{border:1px solid #dcbfc9;padding:8px 11px;background:#fdf5f8;border-radius:999px;color:#714956;font-size:12px;min-height:40px;max-width:100%;white-space:normal}
+.vg-guest-chip:hover,.vg-guest-chip:focus{background:#f6e3eb;outline:2px solid #c987a0}
+.vg-unassigned{margin:16px 0;border-style:dashed}
+@media(max-width:600px){.vg-table-grid{grid-template-columns:1fr}.vg-budget-grid{grid-template-columns:1fr 1fr}.vg-table-card{min-height:260px}.vg-actions .btn{flex:1 1 auto;white-space:normal}.vg-guest-chip{min-height:44px}}
+
+.vg-currency-toolbar{border:1px solid var(--line);border-radius:16px;background:#fffaf8;padding:12px 16px;display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:16px;box-shadow:var(--shadow);font-size:13px;color:#534251}.vg-currency-toolbar strong{display:block;font-size:14px}.vg-currency-toolbar select{background:white;border:1px solid #d9b8c6;border-radius:10px;font-weight:650;padding:11px;color:#493645;min-height:44px;font-size:14px;max-width:100%}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}@media(max-width:600px){.vg-currency-toolbar{align-items:stretch}.vg-currency-toolbar select{width:100%}.vg-currency-toolbar>div:last-child{width:100%}}
+
+.vg-cloud{background:linear-gradient(115deg,#fffaf6,#f7edf3);border:1px solid #dfc5d4;border-radius:16px;padding:14px 16px;margin:5px 0 18px;box-shadow:var(--shadow)}
+.vg-cloud-row{display:flex;gap:15px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.vg-cloud strong{font-size:14px}.vg-cloud-row>div:first-child{flex:1;min-width:180px}
+.vg-cloud-good{font-size:12px;color:#227455;margin-top:5px}
+.vg-cloud-warn{font-size:12px;color:#9a6333;margin-top:5px}
+.vg-cloud-email{font-size:12px;color:#745c6b;word-break:break-all}
+.vg-cloud-actions{display:flex;gap:8px;align-items:center;justify-content:flex-end;flex-wrap:wrap}
+.vg-cloud-actions button,.vg-cloud form button{background:#8e5a76;color:#fff;border:0;border-radius:10px;padding:10px 13px;min-height:42px;font-size:13px;font-weight:700;cursor:pointer}
+.vg-cloud form{margin-top:12px;display:grid;gap:12px;max-width:475px}
+.vg-cloud form label{display:block;font-size:13px;font-weight:700;color:#584758}
+.vg-cloud input{width:100%;display:block;min-height:44px;margin-top:5px;border:1px solid #d2b2c2;border-radius:9px;padding:11px 12px;background:#fff;color:#3a2b35;font:inherit}
+.vg-cloud-note{font-size:13px;color:#655565;line-height:1.6;margin:14px 0 8px}
+.vg-cloud-warning{margin-top:12px;border:1px solid #dca98c;background:#fff1e8;padding:14px;border-radius:12px;color:#684439}
+.vg-cloud-warning p{font-size:13px;line-height:1.5}
+.vg-cloud-warning .vg-cloud-actions{justify-content:flex-start}
+@media(max-width:570px){.vg-cloud-row{align-items:stretch}.vg-cloud-actions{justify-content:flex-start}.vg-cloud-actions button{flex:1}}
+
+</style>
+<link rel="manifest" href="./manifest.webmanifest"><link rel="apple-touch-icon" href="./icon-192.png"></head>
+<body data-page="dashboard"><div class="app">
+<aside class="side"><div class="logo"><span class="mark">✿</span><span>VowGarden</span></div><div class="side-sub">WEDDING PLANNER STUDIO</div><nav id="sideNav" class="nav"></nav><div class="side-tip"><strong>✧ A little planning magic</strong>Every detail, from your first guest to your final dance, all in one lovely place.</div><div class="side-foot">Private browser-based planner · Version 1.2<br>Save backups regularly. No cloud sync.</div></aside>
+<main class="main"><header class="topbar"><div><div class="subline">✿ VowGarden / <span id="breadcrumb">Overview</span></div><div class="muted small" id="topDate" style="margin-top:6px"></div></div><div class="tools"><button class="btn" data-action="backup" title="Download your data">↓ Backup</button><button class="btn" data-action="settings">⚙ Settings</button><button class="btn primary" data-action="add-guest">＋ Guest</button></div></header><div class="intro-banner" id="demoBanner" hidden>✦ <b>Demo wedding:</b> You're exploring a sample plan. Choose <b>Start fresh</b> from Settings before entering real details.</div><div id="view"></div></main></div>
+<nav class="mobile-nav" id="mobileNav"></nav><div id="modalBack" class="modal-back" aria-hidden="true"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="head"><div><div class="eyebrow" id="modalEyebrow">VOWGARDEN</div><h2 id="modalTitle">Edit</h2></div><button type="button" class="iconbtn" data-action="close-modal" aria-label="Close">✕</button></div><form id="modalForm"><div id="modalFields" class="form-grid"></div><div class="form-actions"><button type="button" class="btn" data-action="close-modal">Cancel</button><button type="submit" class="btn primary">Save changes</button></div></form></div></div><div id="toast" class="toast" role="status"></div><input type="file" id="importFile" accept="application/json,.json" hidden>
+<script>
+(()=>{'use strict';
+const KEY='vowgarden-wedding-planner-v1';
+const TABS=[['dashboard','Overview','⌂'],['budget','Budget','◉'],['guests','Guest list','♧'],['tasks','Checklist','☑'],['vendors','Suppliers','✿'],['timeline','Timeline','◷'],['seating','Seating','♙']];
+const CATS=['Venue','Catering','Photography','Flowers','Music','Attire','Decor','Transport','Other'];
+const TASK_CATS=['Planning','Venue','Guests','Suppliers','Outfits','Ceremony','Reception','Other'];
+const VENDOR_CATS=['Venue','Catering','Photographer','Florist','Music','Hair & makeup','Transport','Other'];
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const money=n=>new Intl.NumberFormat(state.settings.currency==='USD'?'en-US':state.settings.currency==='EUR'?'de-DE':'en-GB',{style:'currency',currency:state.settings.currency||'GBP',maximumFractionDigits:2}).format(Number(n)||0);
+const datefmt=s=>s?new Date(s+'T12:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}):'Not set';
+const today=()=>new Date().toISOString().slice(0,10);
+function seed(){return {schema:'vowgarden-1',demo:true,settings:{partner1:'Emma',partner2:'James',date:'2027-06-19',venue:'The Garden House',currency:'GBP',budget:18000,theme:'Blush & Sage'},
+ guests:[{id:'g1',name:'Sophie Miller',side:'Partner 1',status:'Confirmed',plus:false,meal:'Vegetarian',table:'Rose',note:''},{id:'g2',name:'Oliver Reed',side:'Partner 2',status:'Invited',plus:true,meal:'Standard',table:'',note:''},{id:'g3',name:'Amelia Collins',side:'Partner 1',status:'Confirmed',plus:false,meal:'Standard',table:'Rose',note:''},{id:'g4',name:'Henry Parker',side:'Partner 2',status:'Maybe',plus:false,meal:'Vegan',table:'',note:''},{id:'g5',name:'Isla Thompson',side:'Partner 1',status:'Confirmed',plus:true,meal:'Standard',table:'Lily',note:''}],
+ budget:[{id:'b1',category:'Venue',item:'Venue hire',planned:6500,actual:6300,paid:3000},{id:'b2',category:'Catering',item:'Reception dinner',planned:4800,actual:0,paid:0},{id:'b3',category:'Photography',item:'Photography package',planned:1800,actual:1850,paid:450},{id:'b4',category:'Flowers',item:'Ceremony flowers',planned:900,actual:0,paid:0}],
+ tasks:[{id:'t1',title:'Book ceremony venue',due:'2026-12-05',done:true,category:'Venue'},{id:'t2',title:'Confirm photographer',due:'2026-12-20',done:true,category:'Suppliers'},{id:'t3',title:'Send wedding invitations',due:'2027-02-01',done:false,category:'Guests'},{id:'t4',title:'Choose reception menu',due:'2027-03-12',done:false,category:'Suppliers'},{id:'t5',title:'Finalise seating plan',due:'2027-06-05',done:false,category:'Reception'}],
+ vendors:[{id:'v1',type:'Venue',name:'The Garden House',email:'',phone:'',price:6300,status:'Booked'},{id:'v2',type:'Photographer',name:'Golden Hour Studio',email:'',phone:'',price:1850,status:'Booked'}],
+ timeline:[{id:'l1',time:'12:00',title:'Ceremony',owner:'Couple',note:'Garden room'},{id:'l2',time:'13:15',title:'Drinks & photos',owner:'Venue team',note:''},{id:'l3',time:'15:00',title:'Wedding breakfast',owner:'Caterer',note:''},{id:'l4',time:'19:30',title:'First dance',owner:'DJ',note:''}]};}
+function empty(){return {schema:'vowgarden-1',demo:false,settings:{partner1:'Your name',partner2:'Partner',date:'',venue:'',currency:'GBP',budget:15000,theme:'Blush & Sage'},guests:[],budget:[],tasks:[],vendors:[],timeline:[]}}
+function sane(d){if(!d||typeof d!=='object')throw Error('Invalid backup');const s=empty();if(d.settings&&typeof d.settings==='object'){for(const k of Object.keys(s.settings))if(d.settings[k]!==undefined)s.settings[k]=d.settings[k]}if(!['GBP','USD','EUR'].includes(s.settings.currency))s.settings.currency='GBP';for(const k of ['guests','budget','tasks','vendors','timeline'])if(Array.isArray(d[k]))s[k]=d[k].filter(v=>v&&typeof v==='object').slice(0,2000).map(v=>({...v,id:String(v.id||uid())}));if(Array.isArray(d.tables))s.tables=d.tables.slice(0,200).filter(t=>t&&typeof t==='object').map(t=>({id:String(t.id||uid()),name:String(t.name||'').slice(0,100),capacity:Math.min(30,Math.max(1,Math.floor(+t.capacity||8))),shape:t.shape==='rectangle'?'rectangle':'round'})).filter(t=>t.name);s.demo=Boolean(d.demo);return s;}
+function load(){try{const raw=localStorage.getItem(KEY);return raw?sane(JSON.parse(raw)):seed()}catch(e){return seed()}}
+let state=load(),tab='dashboard',guestFilter='All',search='',modalKind='',editId=null;
+const $=s=>document.querySelector(s);
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state));return true}catch(e){toast('Could not save — export a backup');return false}}
+function toast(x){const el=$('#toast');el.textContent=x;el.classList.add('show');clearTimeout(toast._t);toast._t=setTimeout(()=>el.classList.remove('show'),3200)}
+const sum=(arr,key)=>arr.reduce((a,x)=>a+(Number(x[key])||0),0);
+const confirmed=()=>state.guests.filter(x=>x.status==='Confirmed').length;
+const totalAttendees=()=>state.guests.reduce((a,x)=>a+(x.status!=='Declined'?1+(x.plus?1:0):0),0);
+const completed=()=>state.tasks.filter(x=>x.done).length;
+const budgetRemaining=()=>Number(state.settings.budget||0)-sum(state.budget,'planned');
+const daysLeft=()=>{if(!state.settings.date)return null;const ms=new Date(state.settings.date+'T12:00:00')-new Date();return Math.ceil(ms/(1000*60*60*24))};
+function nav(){const html=TABS.map(([id,label,ico])=>`<button class="nav-btn ${tab===id?'active':''}" data-tab="${id}"><span class="emoji">${ico}</span><span>${label}</span></button>`).join('');$('#sideNav').innerHTML=html;$('#mobileNav').innerHTML=TABS.map(([id,label,ico])=>`<button class="${tab===id?'active':''}" data-tab="${id}"><span class="emoji">${ico}</span>${label}</button>`).join('');$('#breadcrumb').textContent=TABS.find(x=>x[0]===tab)[1];document.body.dataset.page=tab;}
+function pageHead(title,desc,add,name){return `<div class="page-header"><div><div class="eyebrow">WEDDING PLANNER</div><h2>${title}</h2><p>${desc}</p></div>${add?`<button class="btn primary" data-action="add-${add}">＋ ${name}</button>`:''}</div>`}
+function emptyCard(t){return `<div class="empty"><div class="em">✿</div>${esc(t)}</div>`}
+function stat(label,value,extra,ico){return `<div class="stat"><span class="mini-icon">${ico}</span><small>${label}</small><strong>${value}</strong><div class="foot">${extra}</div></div>`}
+function progress(a,b){const p=b?Math.min(100,Math.max(0,100*a/b)):0;return `<div class="progress"><span style="width:${p}%"></span></div>`}
+function dashboard(){const days=daysLeft(),budget=+state.settings.budget||0,planned=sum(state.budget,'planned'),paid=sum(state.budget,'paid'),taskP=state.tasks.length?Math.round(completed()*100/state.tasks.length):0;let up=state.tasks.filter(x=>!x.done).sort((a,b)=>String(a.due).localeCompare(String(b.due))).slice(0,4);let bars=CATS.map(cat=>({name:cat,sum:state.budget.filter(x=>x.category===cat).reduce((n,v)=>n+(+v.planned||0),0)})).filter(x=>x.sum>0).sort((a,b)=>b.sum-a.sum).slice(0,5);
+return `<div class="hero"><div><div class="eyebrow">♥ YOUR WEDDING JOURNEY</div><h1>${esc(state.settings.partner1)} <span style="color:#bd7f8c">&</span> ${esc(state.settings.partner2)}<br><span style="font-style:italic;color:#a06d7d">The best day begins here.</span></h1><p>${state.settings.date?`${datefmt(state.settings.date)} · `:''}${esc(state.settings.venue||'Set your wedding date and venue to begin your story.')}</p><button class="btn" data-action="settings">✎ Personalise your day</button></div><div class="count"><strong>${days===null?'∞':Math.max(0,days)}</strong><span>${days===null?'Set your date':'days until “I do”'}</span></div></div>
+<div class="action-row"><button class="btn primary" data-action="add-task">＋ Add a task</button><button class="btn" data-action="add-budget">＋ Add expense</button><button class="btn" data-action="add-guest">＋ Add a guest</button><button class="btn" data-action="pdf">↥ Save summary PDF</button></div>
+<div class="stats">${stat('Wedding budget',money(budget),money(budget-planned)+' unallocated','♡')}${stat('Guest list',state.guests.length+' guests',confirmed()+' confirmed','♧')}${stat('Planning progress',taskP+'%',completed()+' of '+state.tasks.length+' tasks done','☑')}${stat('Paid so far',money(paid),money(sum(state.budget,'actual'))+' actual costs','◉')}</div>
+<div class="two"><div class="panel"><div class="panel-title">✿ Your next steps</div>${up.length?up.map(t=>`<div class="line-row"><div><b>${esc(t.title)}</b><div class="muted small" style="margin-top:4px">${datefmt(t.due)} · ${esc(t.category)}</div></div><button class="iconbtn" data-action="toggle-task" data-id="${esc(t.id)}" title="Mark done">☐</button></div>`).join(''):emptyCard('No upcoming tasks. Add your first checklist item.')}</div><div class="panel"><div class="panel-title">◉ Where your budget goes</div>${bars.length?`<div class="barlist">${bars.map(x=>`<div><div class="bar-label"><span>${esc(x.name)}</span><span>${money(x.sum)}</span></div>${progress(x.sum,Math.max(planned,1))}</div>`).join('')}</div>`:emptyCard('Your budget categories will appear here.')}<div class="line-row" style="margin-top:12px"><span>Planned spend</span><b>${money(planned)} of ${money(budget)}</b></div></div></div>`}
+function budgetView(){const budget=+state.settings.budget||0,planned=sum(state.budget,'planned'),actual=sum(state.budget,'actual'),paid=sum(state.budget,'paid');const remaining=budget-planned;return `${pageHead('The wedding budget','Every detail accounted for, without the overwhelm.','budget','Add expense')}<div class="stats">${stat('Your total budget',money(budget),'Change it in Settings','◉')}${stat('Planned',money(planned),'Across '+state.budget.length+' items','✎')}${stat('Actual spending',money(actual),'Updated as you book','♧')}${stat('Still unallocated',money(remaining),remaining<0?'Over planned budget':'Space left to plan','✿')}</div><div class="panel" style="margin-bottom:16px"><div class="bar-label"><b>Budget allocation</b><b>${budget?Math.round(planned*100/budget):0}%</b></div>${progress(planned,budget)}<p class="muted small" style="margin:8px 0 0">Paid so far: <b>${money(paid)}</b>. Planned, actual and paid are separate values — no double counting.</p></div>${state.budget.length?`<div class="table-box"><table class="data-table"><thead><tr><th>Expense</th><th>Category</th><th>Planned</th><th>Actual</th><th>Paid</th><th>Actions</th></tr></thead><tbody>${state.budget.map(e=>`<tr><td><strong>${esc(e.item)}</strong></td><td>${esc(e.category)}</td><td>${money(e.planned)}</td><td>${money(e.actual)}</td><td>${money(e.paid)}</td><td><button class="btn" data-action="edit-budget" data-id="${esc(e.id)}">Edit</button> <button class="iconbtn" data-action="delete-budget" data-id="${esc(e.id)}">✕</button></td></tr>`).join('')}</tbody></table></div>`:emptyCard('No expenses yet. Start with your venue, catering and photography.')}`}
+function guestView(){let list=state.guests.filter(g=>(guestFilter==='All'||g.status===guestFilter)&&(!search||(`${g.name} ${g.table} ${g.meal}`).toLowerCase().includes(search.toLowerCase())));return `${pageHead('The guest list','Invitations, RSVPs, meal preferences and seating together.','guest','Add guest')}<div class="stats">${stat('Invited guests',state.guests.length,'Includes all RSVP statuses','✉')}${stat('Confirmed',confirmed(),'Yes responses','♥')}${stat('Total expected',totalAttendees(),'Includes possible plus-ones','♧')}${stat('Unassigned tables',state.guests.filter(g=>g.status!=='Declined'&&!g.table).length,'Add tables from guest editor','♙')}</div><div class="filters"><input class="search" id="guestSearch" placeholder="⌕ Search by guest, meal or table…" value="${esc(search)}" style="max-width:350px">${['All','Invited','Confirmed','Maybe','Declined'].map(x=>`<button class="filter ${guestFilter===x?'active':''}" data-filter="${x}">${x}</button>`).join('')}<button class="btn" data-action="guest-csv">↓ CSV</button></div>${list.length?`<div class="table-box"><table class="data-table"><thead><tr><th>Name</th><th>RSVP</th><th>Plus one</th><th>Meal</th><th>Table</th><th>Actions</th></tr></thead><tbody>${list.map(g=>`<tr><td><strong>${esc(g.name)}</strong><div class="muted small">${esc(g.side)}</div></td><td><span class="pill ${g.status==='Confirmed'?'green':g.status==='Maybe'?'orange':g.status==='Declined'?'gray':''}">${esc(g.status)}</span></td><td>${g.plus?'Yes':'—'}</td><td>${esc(g.meal||'—')}</td><td>${esc(g.table||'Unassigned')}</td><td><button class="btn" data-action="edit-guest" data-id="${esc(g.id)}">Edit</button> <button class="iconbtn" data-action="delete-guest" data-id="${esc(g.id)}">✕</button></td></tr>`).join('')}</tbody></table></div>`:emptyCard('No guests in this view. Add people or clear your filters.')}<p class="tab-note" style="margin-top:15px">♡ Your guests are saved on this browser only. A CSV export is available for backups and spreadsheets. This app does not send invitations or emails automatically.</p>`}
+function taskView(){const l=[...state.tasks].sort((a,b)=>Number(a.done)-Number(b.done)||String(a.due).localeCompare(String(b.due)));return `${pageHead('The ultimate checklist','A calmer way to manage everything on your wedding journey.','task','Add task')}<div class="panel" style="margin-bottom:16px"><div class="bar-label"><b>Planning checklist</b><b>${completed()} / ${state.tasks.length} complete</b></div>${progress(completed(),state.tasks.length)}</div>${l.length?`<div class="stack">${l.map(t=>`<div class="cardrow"><div style="display:flex;gap:12px;align-items:flex-start"><button class="iconbtn" data-action="toggle-task" data-id="${esc(t.id)}" aria-label="Toggle task" style="font-size:16px;color:#a06b7b">${t.done?'☑':'☐'}</button><div><h3 style="${t.done?'text-decoration:line-through;opacity:.53':''}">${esc(t.title)}</h3><p>✿ ${esc(t.category)} · ${datefmt(t.due)}</p></div></div><div class="actions"><button class="iconbtn" data-action="edit-task" data-id="${esc(t.id)}">✎</button><button class="iconbtn" data-action="delete-task" data-id="${esc(t.id)}">✕</button></div></div>`).join('')}</div>`:emptyCard('Your wedding checklist is empty — add your first task.')}`}
+function vendorView(){return `${pageHead('Your dream team','Manage contacts and booking statuses for wedding suppliers.','vendor','Add supplier')}${state.vendors.length?`<div class="cols3">${state.vendors.map(v=>`<div class="panel"><div class="eyebrow">${esc(v.type)}</div><h3 style="font-family:Georgia,serif;font-size:22px;font-weight:normal;margin:0 0 10px">${esc(v.name)}</h3><div class="pill ${v.status==='Booked'?'green':v.status==='Paid'?'green':''}">${esc(v.status)}</div><p class="subheading" style="margin-top:14px;min-height:32px">${esc(v.email||v.phone||'Add contact details')}</p><div class="line-row"><span>Estimate</span><b>${money(v.price)}</b></div><div class="action-row" style="margin:10px 0 0"><button class="btn" data-action="edit-vendor" data-id="${esc(v.id)}">Edit supplier</button><button class="btn danger" data-action="delete-vendor" data-id="${esc(v.id)}">Remove</button></div></div>`).join('')}</div>`:emptyCard('Add your dream team: venue, photographer, florist, caterer and more.')}<p class="tab-note" style="margin-top:16px">Contact details remain on your device. No emails or enquiries are sent by this planner.</p>`}
+function timelineView(){const l=[...state.timeline].sort((a,b)=>String(a.time).localeCompare(String(b.time)));return `${pageHead('Your wedding day','Build a beautiful timeline from the morning preparations to the last dance.','timeline','Add moment')}${l.length?`<div class="stack">${l.map(m=>`<div class="cardrow"><div style="display:flex;gap:22px"><span class="serif" style="font-size:23px;color:#b87987;min-width:64px">${esc(m.time)}</span><div><h3>${esc(m.title)}</h3><p>${esc(m.owner||'')} ${m.note?'· '+esc(m.note):''}</p></div></div><div class="actions"><button class="iconbtn" data-action="edit-timeline" data-id="${esc(m.id)}">✎</button><button class="iconbtn" data-action="delete-timeline" data-id="${esc(m.id)}">✕</button></div></div>`).join('')}</div>`:emptyCard('Build your day-of schedule: ceremony, photos, reception and first dance.')}<div class="action-row"><button class="btn green" data-action="pdf">↥ Save full planner PDF</button></div>`}
+function seatingView(){let map={};for(const g of state.guests.filter(x=>x.status!=='Declined')){const key=g.table?.trim()||'Unassigned';(map[key]??=[]).push(g)}const groups=Object.entries(map).sort((a,b)=>a[0]==='Unassigned'?1:b[0]==='Unassigned'?-1:a[0].localeCompare(b[0]));return `${pageHead('Seating arrangements','Keep track of who will be sitting where.','guest','Add guest')}${groups.length?`<div class="seating-grid">${groups.map(([name,people])=>`<div class="seat-card"><div class="bar-label"><h3>${esc(name)}</h3><span class="badge">${people.length} guests</span></div><div class="names">${people.map(g=>`<div>✿ ${esc(g.name)} ${g.plus?'<span class="muted small">(+1)</span>':''}</div>`).join('')}</div></div>`).join('')}</div>`:emptyCard('Add guests and enter their table name in the guest editor.')}<p class="tab-note" style="margin-top:16px">To move a guest between tables, open Guest list → Edit → Table. This is a list-based seating organiser, not a drag-and-drop floor plan.</p>`}
+function render(){nav();$('#topDate').textContent=state.settings.date?'Wedding date · '+datefmt(state.settings.date):'Plan your story, one detail at a time';$('#demoBanner').hidden=!state.demo;const views={dashboard,budget:budgetView,guests:guestView,tasks:taskView,vendors:vendorView,timeline:timelineView,seating:seatingView};$('#view').innerHTML=views[tab]();}
+const schema={guest:{title:'Guest details',fields:[['name','Guest name','text',true],['side','Side','select',['Partner 1','Partner 2','Both']],['status','RSVP status','select',['Invited','Confirmed','Maybe','Declined']],['plus','Plus one included','checkbox'],['meal','Meal preference','select',['Standard','Vegetarian','Vegan','Gluten-free','Other']],['table','Table name','text'],['note','Notes','textarea']]},budget:{title:'Wedding expense',fields:[['item','Item / expense','text',true],['category','Category','select',CATS],['planned','Planned cost','number'],['actual','Actual cost','number'],['paid','Amount paid','number']]},task:{title:'Checklist task',fields:[['title','What needs doing?','text',true],['category','Category','select',TASK_CATS],['due','Due date','date'],['done','Mark complete','checkbox']]},vendor:{title:'Wedding supplier',fields:[['name','Supplier name','text',true],['type','Category','select',VENDOR_CATS],['email','Email','email'],['phone','Phone','text'],['price','Quoted price','number'],['status','Booking status','select',['Enquiring','Quoted','Booked','Paid']] ]},timeline:{title:'Wedding day moment',fields:[['time','Time','time',true],['title','Event','text',true],['owner','Responsible person','text'],['note','Notes','textarea']]},settings:{title:'Your wedding',fields:[['partner1','First name','text',true],['partner2','Partner name','text',true],['date','Wedding date','date'],['venue','Venue','text'],['currency','Currency','select',['GBP','USD','EUR']],['budget','Total budget','number'],['theme','Style / theme','text']]}};
+const collection={guest:'guests',budget:'budget',task:'tasks',vendor:'vendors',timeline:'timeline'};
+function fieldMarkup(desc,value){const [key,label,type,extra]=desc;const attrs=type==='number'?'step="0.01" min="0"':type==='date'?'':type==='email'?'autocomplete="email"':'';return `<div class="field ${type==='textarea'?'full':''}"><label for="fld-${key}">${esc(label)}</label>${type==='select'?`<select id="fld-${key}" name="${key}">${extra.map(x=>`<option ${String(value)===String(x)?'selected':''} value="${esc(x)}">${esc(x==='GBP'?'British Pound (GBP)':x==='USD'?'US Dollar (USD)':x==='EUR'?'Euro (EUR)':x)}</option>`).join('')}</select>`:type==='textarea'?`<textarea id="fld-${key}" name="${key}">${esc(value??'')}</textarea>`:type==='checkbox'?`<input type="checkbox" id="fld-${key}" name="${key}" ${value?'checked':''} style="width:21px;height:21px;accent-color:#bc7b8b">`:`<input id="fld-${key}" name="${key}" type="${type}" value="${esc(value??'')}" ${attrs} ${extra===true?'required':''}>`}</div>`}
+function openModal(kind,id){modalKind=kind;editId=id||null;const spec=schema[kind];let obj;if(kind==='settings')obj=state.settings;else obj=(state[collection[kind]]||[]).find(x=>x.id===id)||{};$('#modalEyebrow').textContent=id?'EDIT DETAILS':'NEW ENTRY';$('#modalTitle').textContent=spec.title;$('#modalFields').innerHTML=spec.fields.map(f=>fieldMarkup(f,obj[f[0]])).join('');$('#modalBack').classList.add('open');$('#modalBack').setAttribute('aria-hidden','false');setTimeout(()=>$('#modalFields input:not([type=checkbox]),#modalFields select')?.focus(),30)}
+function closeModal(){$('#modalBack').classList.remove('open');$('#modalBack').setAttribute('aria-hidden','true');modalKind='';editId=null}
+function remove(kind,id){if(!confirm('Remove this item? This cannot be undone unless you restore a backup.'))return;const key=collection[kind];state[key]=state[key].filter(x=>x.id!==id);save();render();toast('Removed')}
+function doSave(e){e.preventDefault();if(!modalKind)return;const spec=schema[modalKind];const data=new FormData(e.target);let val={};for(const [k,_,type] of spec.fields){val[k]=type==='checkbox'?Boolean(e.target.elements[k]?.checked):type==='number'?Math.max(0,Number(data.get(k))||0):String(data.get(k)||'').trim()}if(modalKind==='settings'){if(!val.partner1||!val.partner2){toast('Please enter both names');return}if(val.currency!==state.settings.currency&&(state.budget.length||state.vendors.length)&&!confirm('Changing currency changes the symbol, NOT existing numeric amounts. Export a backup and start a fresh plan for another currency. Continue?'))return;state.settings={...state.settings,...val};state.demo=false;}else{const key=collection[modalKind];if(editId){const i=state[key].findIndex(x=>x.id===editId);if(i>=0)state[key][i]={...state[key][i],...val}}else state[key].push({id:uid(),...val});}if(save()){closeModal();render();toast('Saved ✓')}}
+function dl(blob,name){const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),120000)}
+function backup(){dl(new Blob([JSON.stringify({...state,exportedAt:new Date().toISOString()},null,2)],{type:'application/json'}),'VowGarden_Wedding_Backup.json');toast('Backup downloaded ✓')}
+function csv(){const rows=[['Name','Side','RSVP','Plus one','Meal','Table','Notes'],...state.guests.map(x=>[x.name,x.side,x.status,x.plus?'Yes':'No',x.meal,x.table,x.note])];const str='\ufeff'+rows.map(r=>r.map(x=>'"'+String(x??'').replace(/"/g,'""')+'"').join(',')).join('\r\n');dl(new Blob([str],{type:'text/csv;charset=utf-8'}),'VowGarden_Guest_List.csv');toast('CSV downloaded ✓')}
+function pdfBlob(lines){const rows=[];for(const item of lines){const str=String(item??'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').replace(/[–—]/g,'-');for(const segment of str.split('\n')){if(!segment.trim()){rows.push('');continue}let line='';for(const word of segment.split(/\s+/)){if(line&&line.length+word.length>77){rows.push(line);line=word}else line+=(line?' ':'')+word}rows.push(line)}}const pages=[];for(let i=0;i<rows.length;i+=43)pages.push(rows.slice(i,i+43));const obj=[];obj[1]='<< /Type /Catalog /Pages 2 0 R >>';obj[2]='<< /Type /Pages /Kids ['+pages.map((_,i)=>(4+i*2)+' 0 R').join(' ')+'] /Count '+pages.length+' >>';obj[3]='<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>';const e=s=>String(s).replace(/£/g,'\u00a3').replace(/€/g,'\u0080').replace(/[^\x20-\x7E\u00a3\u0080]/g,'?').replace(/[\\()]/g,'\\$&').replace(/\u00a3/g,'\\243').replace(/\u0080/g,'\\200');for(let i=0;i<pages.length;i++){const p=4+i*2,streamNo=p+1;const cmd=['BT','/F1 11 Tf','45 795 Td','16 TL'];for(let j=0;j<pages[i].length;j++)cmd.push('('+e(pages[i][j])+') Tj','T*');cmd.push('ET');const stream=cmd.join('\n')+'\n';obj[p]='<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents '+streamNo+' 0 R >>';obj[streamNo]='<< /Length '+stream.length+' >>\nstream\n'+stream+'endstream'}let pdf='%PDF-1.4\n%\xe2\xe3\xcf\xd3\n',offset=[0];for(let i=1;i<obj.length;i++){offset[i]=pdf.length;pdf+=i+' 0 obj\n'+obj[i]+'\nendobj\n'}const cross=pdf.length;pdf+='xref\n0 '+obj.length+'\n0000000000 65535 f \n';for(let i=1;i<obj.length;i++)pdf+=String(offset[i]).padStart(10,'0')+' 00000 n \n';pdf+='trailer\n<< /Size '+obj.length+' /Root 1 0 R >>\nstartxref\n'+cross+'\n%%EOF';const bytes=new Uint8Array(pdf.length);for(let i=0;i<pdf.length;i++)bytes[i]=pdf.charCodeAt(i)&255;return new Blob([bytes],{type:'application/pdf'})}
+function pdf(){const v=state.settings;const lines=['VOWGARDEN - WEDDING PLANNING SUMMARY','','Couple: '+v.partner1+' & '+v.partner2,'Wedding date: '+datefmt(v.date),'Venue: '+(v.venue||'Not set'),'Currency: '+v.currency,'','BUDGET','Total budget: '+money(v.budget),'Planned spend: '+money(sum(state.budget,'planned')),'Actual costs: '+money(sum(state.budget,'actual')),'Paid: '+money(sum(state.budget,'paid')),''];for(const b of state.budget)lines.push(b.category+' | '+b.item+' | Planned '+money(b.planned)+' | Actual '+money(b.actual));lines.push('','GUEST LIST','Guests: '+state.guests.length+' / Confirmed: '+confirmed());for(const g of state.guests)lines.push(g.name+' | '+g.status+' | '+(g.table||'Unassigned')+' | '+(g.meal||'-'));lines.push('','PLANNING CHECKLIST');for(const t of state.tasks)lines.push((t.done?'[DONE] ':'[ ] ')+t.title+' | '+datefmt(t.due));lines.push('','DAY SCHEDULE');for(const t of [...state.timeline].sort((a,b)=>String(a.time).localeCompare(String(b.time))))lines.push(t.time+' - '+t.title+' - '+(t.owner||''));lines.push('','Generated on '+new Date().toLocaleDateString('en-GB'),'Your details stay in this browser. Please make regular backups.');const file=new File([pdfBlob(lines)],'VowGarden_Wedding_Plan.pdf',{type:'application/pdf'});try{if(navigator.share&&navigator.canShare?.({files:[file]})){navigator.share({files:[file],title:'My wedding plan'}).catch(e=>{if(e.name!=='AbortError')dl(file,file.name)});return}}catch(e){}dl(file,file.name);toast('PDF ready — open Downloads to print or save')}
+function handle(action,id){if(action==='close-modal'){closeModal();return}if(action==='settings'){openModal('settings');return}if(action==='backup'){backup();return}if(action==='guest-csv'){csv();return}if(action==='pdf'){pdf();return}if(action==='import'){$('#importFile').click();return}if(action==='demo'){if(confirm('Load sample wedding data? Back up your current plan first.')){state=seed();save();tab='dashboard';closeModal();render();toast('Sample wedding loaded')}return}if(action==='fresh'){if(confirm('Start a fresh wedding? This replaces all current data. Download a backup first if needed.')){state=empty();save();tab='dashboard';closeModal();render();toast('New plan ready')}return}if(action==='toggle-task'){const t=state.tasks.find(x=>x.id===id);if(t){t.done=!t.done;save();render();toast(t.done?'Task completed ✓':'Task reopened')}return}if(action?.startsWith('add-')){openModal(action.slice(4));return}if(action?.startsWith('edit-')){openModal(action.slice(5),id);return}if(action?.startsWith('delete-')){remove(action.slice(7),id);return}}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-tab]');if(b){tab=b.dataset.tab;render();window.scrollTo({top:0,behavior:'auto'});return}const btn=e.target.closest('[data-action]');if(btn)handle(btn.dataset.action,btn.dataset.id)});
+document.addEventListener('input',e=>{if(e.target.id==='guestSearch'){search=e.target.value;const t=tab;if(t==='guests'){const caret=e.target.selectionStart;render();const s=$('#guestSearch');s.focus();s.setSelectionRange(caret,caret)}}});document.addEventListener('click',e=>{const f=e.target.closest('[data-filter]');if(f){guestFilter=f.dataset.filter;render()}});
+$('#modalForm').addEventListener('submit',e=>doSave(e));
+$('#modalBack').addEventListener('click',e=>{if(e.target===$('#modalBack'))closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+$('#importFile').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;try{const raw=await f.text(),d=sane(JSON.parse(raw));if(!confirm('Replace your current wedding plan with this backup?'))return;state=d;save();tab='dashboard';closeModal();render();toast('Backup restored ✓')}catch(err){toast('Invalid backup file')}finally{e.target.value=''}});
+// Add a small data management section to Settings modal, not hidden behind extra navigation.
+const originalOpen=openModal;openModal=function(kind,id){originalOpen(kind,id);if(kind==='settings'){$('#modalFields').insertAdjacentHTML('beforeend',`<div class="field full" style="border-top:1px solid #eadfe0;margin-top:5px;padding-top:15px"><label>DATA & DEMO</label><div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="btn" data-action="backup">↓ Backup JSON</button><button type="button" class="btn" data-action="import">↑ Restore backup</button><button type="button" class="btn" data-action="demo">✿ Sample data</button><button type="button" class="btn danger" data-action="fresh">Start fresh</button></div><p class="muted small" style="line-height:1.5;margin-top:7px">Your data stays on this browser. This app does not sync automatically between devices.</p></div>`)}};
+// VowGarden 1.1 / 1.2 — non-destructive enhancements.
+// Existing key, guest/budget fields, backups and current data preserved.
+const VG_VERSION="1.2";
+let selectedSeatGuest=null;
+if(!Array.isArray(state.tables)){
+ const names=[...new Set(state.guests.map(g=>String(g.table||'').trim()).filter(Boolean))];
+ state.tables=names.map((name,i)=>({id:'legacy-table-'+i,name,capacity:8,shape:'round'}));
+}
+schema.guest.fields.push(
+ ['plusName','Plus-one name (optional)','text'],
+ ['allergies','Allergies or dietary restrictions','textarea'],
+ ['group','Family or group','text']
+);
+schema.budget.fields.push(
+ ['deposit','Deposit agreed','number'],
+ ['paymentDue','Next payment due','date'],
+ ['paymentStatus','Payment status','select',['Not started','Deposit paid','Part-paid','Paid','Overdue']]
+);
+schema.table={
+ title:'Seating table',
+ fields:[
+ ['name','Table name','text',true],
+ ['capacity','Number of seats','number'],
+ ['shape','Table shape','select',['round','rectangle']]
+ ]
+};
+collection.table='tables';
+const vgToday=()=>new Date().toISOString().slice(0,10);
+const vgMoney=n=>money(Number(n)||0);
+const vgSafeDate=d=>d&&/^\d{4}-\d\d-\d\d$/.test(d)?datefmt(d):'Not set';
+const vgTableGuests=name=>state.guests.filter(g=>g.status!=='Declined'&&String(g.table||'').trim()===name);
+const vgSeats=gs=>gs.reduce((a,g)=>a+1+(g.plus?1:0),0);
+const vgAllExpected=()=>vgSeats(state.guests.filter(g=>g.status!=='Declined'));
+const vgBudgetDue=b=>Math.max(0,Math.max(+b.actual||0,+b.planned||0)-(+b.paid||0));
+const vgBudgetData=()=>({planned:sum(state.budget,'planned'),actual:sum(state.budget,'actual'),paid:sum(state.budget,'paid'),due:state.budget.reduce((a,b)=>a+vgBudgetDue(b),0)});
+const vgDueAlerts=()=>state.budget.filter(b=>vgBudgetDue(b)>0&&b.paymentDue&&b.paymentDue<vgToday());
+const vgConfirmStatus=g=>g.status==='Confirmed'?'green':g.status==='Maybe'?'orange':g.status==='Declined'?'gray':'';
+const vgTrim=x=>String(x||'').trim();
+const vgMeal=g=>esc(g.meal||'Not selected')+(g.allergies?'<div class="muted small">⚠ '+esc(g.allergies)+'</div>':'');
+const vgGroup=g=>g.group?'<div class="muted small">Group: '+esc(g.group)+'</div>':'';
+const vgPlus=g=>g.plus?('Yes'+(g.plusName?' — '+esc(g.plusName):'')):'No';
+
+budgetView=function(){
+ const max=+state.settings.budget||0,bd=vgBudgetData();
+ const remaining=max-bd.planned;const categories=[...new Set([...CATS,...state.budget.map(x=>x.category)])];
+ const cats=categories.map(cat=>({cat,items:state.budget.filter(x=>x.category===cat)})).filter(x=>x.items.length);
+ const alert=remaining<0?'<div class="vg-alert" role="status">⚠ You have planned '+vgMoney(-remaining)+' more than your total wedding budget.</div>':'';
+ const overdue=vgDueAlerts();
+ return pageHead('Wedding budget & payments','Deposits, balances, due dates and categories in one place.','budget','Add expense')
+ +'<div class="stats">'+stat('Wedding budget',money(max),'Set in Settings','◉')
+ +stat('Planned',vgMoney(bd.planned),'Across '+state.budget.length+' items','✎')
+ +stat('Paid so far',vgMoney(bd.paid),'Deposits included','♥')
+ +stat('Outstanding',vgMoney(bd.due),'Estimated unpaid balance','◷')+'</div>'
+ +alert
+ +(overdue.length?'<div class="vg-alert">⚠ Overdue payment dates: '+overdue.length+'. Open the expense to update the due date or payment.</div>':'')
+ +'<div class="panel" style="margin:14px 0"><div class="bar-label"><b>Budget allocation</b><b>'+Math.round(max?bd.planned/max*100:0)+'%</b></div>'+progress(bd.planned,max)
+ +'<div class="vg-budget-grid"><div>Still unallocated <strong>'+vgMoney(remaining)+'</strong></div><div>Actual costs <strong>'+vgMoney(bd.actual)+'</strong></div></div></div>'
+ +(cats.length?'<div class="vg-category-grid">'+cats.map(x=>{const n=x.items.reduce((a,v)=>a+(+v.planned||0),0);return '<div class="vg-category"><strong>'+esc(x.cat)+'</strong><div>'+vgMoney(n)+'</div>'+progress(n,max)+'</div>'}).join('')+'</div>':'')
+ +(state.budget.length?'<div class="table-box"><table class="data-table"><thead><tr><th>Expense / category</th><th>Planned</th><th>Actual</th><th>Deposit</th><th>Paid</th><th>Outstanding</th><th>Due / status</th><th>Actions</th></tr></thead><tbody>'
+ +state.budget.map(b=>{const due=vgBudgetDue(b),over=due>0&&b.paymentDue&&b.paymentDue<vgToday();return '<tr><td><strong>'+esc(b.item)+'</strong><div class="muted small">'+esc(b.category)+'</div></td><td>'+vgMoney(b.planned)+'</td><td>'+vgMoney(b.actual)+'</td><td>'+vgMoney(b.deposit)+'</td><td>'+vgMoney(b.paid)+'</td><td><strong>'+vgMoney(due)+'</strong></td><td><span class="'+(over?'vg-overdue':'')+'">'+vgSafeDate(b.paymentDue)+'</span><div class="muted small">'+esc(b.paymentStatus||'Not started')+'</div></td><td><button class="btn" data-action="edit-budget" data-id="'+esc(b.id)+'">Edit</button> <button class="iconbtn" data-action="delete-budget" data-id="'+esc(b.id)+'">✕</button></td></tr>'}).join('')
+ +'</tbody></table></div>':emptyCard('Add your first expense to track deposits and payment dates.'))
+ +'<div class="vg-actions"><button class="btn" data-action="pdf-report-budget">↓ Budget PDF</button></div>';
+};
+
+guestView=function(){
+ const list=state.guests.filter(g=>(guestFilter==='All'||g.status===guestFilter)&&(!search||[g.name,g.group,g.side,g.meal,g.allergies,g.table,g.plusName].join(' ').toLowerCase().includes(search.toLowerCase())));
+ const confirmedPersons=vgSeats(state.guests.filter(g=>g.status==='Confirmed'));
+ return pageHead('Wedding guests & RSVP','Invitations, plus-ones, dietary needs and family groups.','guest','Add guest')
+ +'<div class="stats">'+stat('Invited entries',state.guests.length,'One record per invitation','✉')
+ +stat('Confirmed people',confirmedPersons,'Includes confirmed plus-ones','♥')
+ +stat('Possible seats',vgAllExpected(),'Excludes declined RSVPs','♙')
+ +stat('Unseated people',vgSeats(state.guests.filter(g=>g.status!=='Declined'&&!g.table)),'Allocate in Seating','♧')+'</div>'
+ +'<div class="filters"><input class="search" id="guestSearch" placeholder="⌕ Search guest, family, meal or allergy…" value="'+esc(search)+'" style="max-width:330px">'
+ +['All','Invited','Confirmed','Maybe','Declined'].map(x=>'<button class="filter '+(guestFilter===x?'active':'')+'" data-filter="'+x+'">'+x+'</button>').join('')
+ +'<button class="btn" data-action="guest-csv">↓ CSV</button><button class="btn" data-action="pdf-report-guests">↓ Guest PDF</button></div>'
+ +(list.length?'<div class="table-box"><table class="data-table"><thead><tr><th>Name / family</th><th>RSVP</th><th>Plus one</th><th>Meal / allergies</th><th>Table</th><th>Actions</th></tr></thead><tbody>'
+ +list.map(g=>'<tr><td><strong>'+esc(g.name)+'</strong><div class="muted small">'+esc(g.side||'')+'</div>'+vgGroup(g)+'</td><td><span class="pill '+vgConfirmStatus(g)+'">'+esc(g.status)+'</span></td><td>'+vgPlus(g)+'</td><td>'+vgMeal(g)+'</td><td>'+esc(g.table||'Unassigned')+'</td><td><button class="btn" data-action="edit-guest" data-id="'+esc(g.id)+'">Edit</button> <button class="iconbtn" data-action="delete-guest" data-id="'+esc(g.id)+'">✕</button></td></tr>').join('')
+ +'</tbody></table></div>':emptyCard('No matching guests. Add a guest or clear filters.'))
+ +'<p class="tab-note" style="margin-top:13px">Your data stays in this browser. Allergies and names are personal data: protect your device and backups. No automated invitations are sent.</p>';
+};
+
+seatingView=function(){
+ const occupied=new Set();
+ const tables=(state.tables||[]).map(t=>{
+   const guests=vgTableGuests(t.name);guests.forEach(g=>occupied.add(g.id));
+   const taken=vgSeats(guests);const cap=Math.max(1,+t.capacity||8);
+   const over=taken>cap;
+   return '<div class="vg-table-card '+(over?'vg-table-over':'')+'" data-table-target="'+esc(t.id)+'" role="button" tabindex="0" aria-label="Assign selected guest to table '+esc(t.name)+'">'
+    +'<div class="bar-label"><strong>'+esc(t.name)+'</strong><span class="'+(over?'vg-overdue':'muted')+'">'+taken+' / '+cap+' seats</span></div>'
+    +'<div class="vg-table-shape '+(t.shape==='rectangle'?'rect':'')+'">♡<span>'+cap+' seats</span></div>'
+    +'<div class="vg-seat-list">'+guests.map(g=>'<button class="vg-guest-chip" draggable="true" data-seat-guest="'+esc(g.id)+'" data-guest-drag="'+esc(g.id)+'" type="button" title="Select to move">'+esc(g.name)+(g.plus?' +1':'')+'</button>').join('')+'</div>'
+    +(over?'<div class="vg-overdue">⚠ Over capacity by '+(taken-cap)+' seat(s)</div>':'')
+    +'<div class="vg-actions"><button class="btn" data-action="edit-table" data-id="'+esc(t.id)+'">Edit table</button><button class="btn" data-action="delete-table" data-id="'+esc(t.id)+'">Remove</button></div></div>';
+ });
+ const unassigned=state.guests.filter(g=>g.status!=='Declined'&&!occupied.has(g.id));
+ return pageHead('Visual seating planner','Choose a guest, then tap a table on iPhone. On desktop, you may also drag guests.',null,null)
+ +'<div class="vg-actions"><button class="btn primary" data-action="add-table">＋ Add table</button><button class="btn" data-action="pdf-report-seating">↓ Seating PDF</button></div>'
+ +'<div class="vg-seat-toolbar" id="vg-seat-selection" role="status">'+(selectedSeatGuest?'Selected: '+esc(state.guests.find(x=>x.id===selectedSeatGuest)?.name||'Guest')+'. Tap a table below to move them.':'Tap a guest name, then choose a table. Long press and drag also works on desktop.')+'</div>'
+ +'<div class="vg-table-grid">'+tables.join('')+'</div>'
+ +'<div class="panel vg-unassigned" data-table-target="UNASSIGNED" role="button" tabindex="0"><h3>Guests not assigned to a table</h3>'
+ +(unassigned.length?'<div class="vg-seat-list">'+unassigned.map(g=>'<button class="vg-guest-chip" draggable="true" data-seat-guest="'+esc(g.id)+'" data-guest-drag="'+esc(g.id)+'" type="button">'+esc(g.name)+(g.plus?' +1':'')+'</button>').join('')+'</div>':'<p class="muted">Everyone has a table.</p>')
+ +'<p class="muted small" style="margin:10px 0 0">To unassign a seated guest: tap their name, then tap this panel.</p></div>'
+ +'<p class="tab-note">Capacity includes plus-ones and excludes declined invitations. Counts are estimates until every RSVP is confirmed.</p>';
+};
+
+const vgOldHandle=handle;
+handle=function(action,id){
+ if(action==='delete-table'){
+  const t=state.tables.find(t=>t.id===id);if(!t)return;
+  if(!confirm('Remove table '+t.name+'? Guests will become unassigned.'))return;
+  state.tables=state.tables.filter(v=>v.id!==id);
+  for(const g of state.guests)if(g.table===t.name)g.table='';
+  save();render();toast('Table removed. Guests are unassigned.');return;
+ }
+ if(action?.startsWith('pdf-report-')){vgReport(action.slice(11));return}
+ return vgOldHandle(action,id);
+};
+const vgOldDoSave=doSave;
+doSave=function(e){
+ if(modalKind==='table'){
+  const fd=new FormData(e.target);
+  const name=vgTrim(fd.get('name'));
+  if(!name){e.preventDefault();toast('Enter a table name');return;}
+  const current=state.tables.find(x=>x.id===editId);
+  if(state.tables.some(x=>x.name.toLowerCase()===name.toLowerCase()&&x.id!==editId)){e.preventDefault();toast('Table names must be unique');return;}
+  const oldName=current?.name||null;
+  const cap=Math.max(1,Math.floor(+fd.get('capacity')||8));
+  const assigned=vgSeats(state.guests.filter(g=>g.status!=='Declined'&&g.table===(oldName||name)));
+  if(assigned>cap&&!confirm('This table will be over capacity. Continue?')){e.preventDefault();return;}
+  // Existing generic save handler gets fields via FormData and keeps IDs.
+  vgOldDoSave(e);
+  const target=state.tables.find(x=>x.id===editId)||state.tables.find(x=>x.name===name);
+  if(target){target.capacity=cap;target.shape=target.shape==='rectangle'?'rectangle':'round';}
+  if(oldName&&oldName!==name)for(const g of state.guests)if(g.table===oldName)g.table=name;
+  save();render();return;
+ }
+ return vgOldDoSave(e);
+};
+// Render selection and allow mouse DnD. Touchscreen uses tap-to-move, avoiding unreliable HTML5 drag on Safari.
+document.addEventListener('click',e=>{
+ const chip=e.target.closest('[data-seat-guest]');
+ if(chip){selectedSeatGuest=chip.dataset.seatGuest;render();return}
+ if(e.target.closest('[data-action]'))return;
+ const box=e.target.closest('[data-table-target]');
+ if(!box||!selectedSeatGuest)return;
+ const guest=state.guests.find(g=>g.id===selectedSeatGuest);
+ if(!guest)return;
+ const target=box.dataset.tableTarget;
+ const table=state.tables.find(t=>t.id===target);
+ const name=table?table.name:'';
+ if(table){
+  const taken=vgSeats(vgTableGuests(name).filter(x=>x.id!==guest.id));
+  const need=1+(guest.plus?1:0);
+  if(taken+need>Math.max(1,+table.capacity||8)){toast('Not enough free seats at '+table.name);return}
+ }
+ guest.table=name;selectedSeatGuest=null;save();render();toast('Guest moved ✓');
+});
+document.addEventListener('dragstart',e=>{
+ const chip=e.target.closest('[data-guest-drag]');if(!chip||!e.dataTransfer)return;
+ e.dataTransfer.setData('text/plain',chip.dataset.guestDrag);
+ e.dataTransfer.effectAllowed='move';
+});
+document.addEventListener('dragover',e=>{if(e.target.closest('[data-table-target]'))e.preventDefault()});
+document.addEventListener('drop',e=>{
+ const box=e.target.closest('[data-table-target]');if(!box||!e.dataTransfer)return;
+ e.preventDefault();const id=e.dataTransfer.getData('text/plain');const g=state.guests.find(x=>x.id===id);if(!g)return;
+ const table=state.tables.find(x=>x.id===box.dataset.tableTarget),name=table?.name||'';
+ if(table&&vgSeats(vgTableGuests(name).filter(x=>x.id!==id))+1+(g.plus?1:0)>Math.max(1,+table.capacity||8)){toast('Table full');return}
+ g.table=name;selectedSeatGuest=null;save();render();toast('Guest moved ✓');
+});
+document.addEventListener('keydown',e=>{
+ if((e.key==='Enter'||e.key===' ')&&e.target.matches('[data-table-target]')&&selectedSeatGuest){
+  e.preventDefault();e.target.click()
+ }
+});
+
+const vgPdfButton=(label,kind)=>'<button class="btn" data-action="pdf-report-'+kind+'">↓ '+label+' PDF</button>';
+function vgReport(kind){
+ const s=state.settings;
+ const title={'budget':'Budget & payments','guests':'Guests & RSVP','seating':'Seating plan','timeline':'Wedding day timeline','vendors':'Supplier contacts'}[kind];
+ if(!title){toast('Unknown report');return}
+ const lines=['VOWGARDEN WEDDING PLANNER | '+title.toUpperCase(),'',
+   s.partner1+' & '+s.partner2,
+   'Wedding: '+vgSafeDate(s.date),
+   'Venue: '+(s.venue||'Not set'),'Generated: '+new Date().toLocaleDateString('en-GB'),''];
+ if(kind==='budget'){
+  const b=vgBudgetData();
+  lines.push('Total budget: '+money(s.budget),'Planned: '+money(b.planned),'Actual: '+money(b.actual),'Paid: '+money(b.paid),'Outstanding: '+money(b.due),'Unallocated: '+money((+s.budget||0)-b.planned),'');
+  for(const v of state.budget){lines.push('CATEGORY: '+v.category+' | '+v.item,' Planned: '+vgMoney(v.planned)+' | Actual: '+vgMoney(v.actual),' Deposit: '+vgMoney(v.deposit)+' | Paid: '+vgMoney(v.paid),' Outstanding: '+vgMoney(vgBudgetDue(v))+' | Due: '+vgSafeDate(v.paymentDue),' Status: '+(v.paymentStatus||'Not started'),'');}
+ }else if(kind==='guests'){
+  lines.push('Guest invitations: '+state.guests.length,'Confirmed: '+confirmed(),'People requiring seats (estimated): '+vgAllExpected(),'');
+  for(const g of state.guests)lines.push(g.name+' | '+(g.group||'No group')+' | '+g.status,' Plus-one: '+(g.plus?g.plusName||'Yes':'No')+' | Meal: '+(g.meal||'None'),' Allergies: '+(g.allergies||'None')+' | Table: '+(g.table||'Unassigned'),'');
+ }else if(kind==='seating'){
+  for(const t of state.tables){const gs=vgTableGuests(t.name);lines.push('TABLE '+t.name+' | '+vgSeats(gs)+' / '+Math.max(1,+t.capacity||8)+' seats');for(const g of gs)lines.push('  '+g.name+(g.plus?' (+1: '+(g.plusName||'guest')+')':'')+' | '+(g.meal||''));lines.push('');}
+  lines.push('UNASSIGNED');for(const g of state.guests.filter(g=>g.status!=='Declined'&&!g.table))lines.push(' '+g.name+(g.plus?' (+1)':''));
+ }else if(kind==='timeline'){
+  for(const t of [...state.timeline].sort((a,b)=>String(a.time).localeCompare(String(b.time))))lines.push((t.time||'')+'  '+t.title+' | '+(t.owner||'')+' | '+(t.note||''));
+ }else if(kind==='vendors'){
+  for(const v of state.vendors)lines.push((v.type||'Supplier')+': '+v.name,' Email: '+(v.email||'Not supplied'),' Phone: '+(v.phone||'Not supplied'),' Status: '+(v.status||'')+' | Quoted: '+vgMoney(v.price),'');
+ }
+ lines.push('','VowGarden • Private wedding planning report','Please verify all details and keep guest contact and allergy information secure.');
+ const blob=pdfBlob(lines);
+ const file=new File([blob],'VowGarden_'+kind.charAt(0).toUpperCase()+kind.slice(1)+'_Report.pdf',{type:'application/pdf'});
+ try{
+  if(navigator.share&&navigator.canShare?.({files:[file]})){
+   navigator.share({files:[file],title:'VowGarden — '+title}).catch(e=>{if(e.name!=='AbortError')dl(file,file.name)});
+   return;
+  }
+ }catch(e){}
+ dl(file,file.name);toast('PDF downloaded: '+title);
+}
+// Add five clearly labelled PDF reports to each related module.
+// Currency selection for all wedding modules. One selected currency, no silent conversions.
+const vgCurrencies=[["GBP","£ British pounds (GBP)"],["USD","$ US dollars (USD)"],["EUR","€ Euros (EUR)"]];
+function vgCurrencyChooser(){
+ return '<div class="vg-currency-toolbar"><div><strong>Wedding currency</strong><div class="muted small">Prices, totals and PDFs use your chosen currency.</div></div><div><label class="sr-only" for="vgCurrencySelect">Wedding currency</label><select id="vgCurrencySelect" aria-label="Wedding currency">'
+ +vgCurrencies.map(([code,label])=>'<option value="'+code+'" '+(state.settings.currency===code?'selected':'')+'>'+esc(label)+'</option>').join('')
+ +'</select></div></div>';
+}
+document.addEventListener("change",e=>{
+ if(e.target.id!=="vgCurrencySelect")return;
+ const desired=e.target.value,previous=state.settings.currency;
+ if(!["GBP","USD","EUR"].includes(desired)||desired===previous)return;
+ if((state.budget.length||state.vendors.length)&&!confirm("Change currency from "+previous+" to "+desired+"?\n\nIMPORTANT: Values are NOT converted. Review your budget, expenses and supplier prices after changing currency.")){e.target.value=previous;return;}
+ state.settings.currency=desired;
+ if(save()){render();toast("Currency: "+desired+" ✓");}else state.settings.currency=previous;
+});
+const vgOldRender=render;
+render=function(){
+ vgOldRender();
+ $('#view')?.insertAdjacentHTML('afterbegin',vgCurrencyChooser());
+ if(tab==='timeline')$('#view')?.insertAdjacentHTML('beforeend','<div class="vg-actions">'+vgPdfButton('Timeline','timeline')+'</div>');
+ if(tab==='vendors')$('#view')?.insertAdjacentHTML('beforeend','<div class="vg-actions">'+vgPdfButton('Supplier contacts','vendors')+'</div>');
+ if(tab==='dashboard')$('#view')?.insertAdjacentHTML('beforeend',
+  '<div class="panel"><h3>Five wedding reports</h3><p class="muted">Create separate PDFs for guests, budget, seating, timeline and suppliers.</p><div class="vg-actions">'
+  +['budget','guests','seating','timeline','vendors'].map(k=>vgPdfButton(k.charAt(0).toUpperCase()+k.slice(1),k)).join('')+'</div></div>');
+};
+
+
+/* VowGarden Cloud Backup v1 — opt-in, encrypted, version-checked. */
+const vgApi='https://zekvdohbvowzterpfvxo.supabase.co';
+const vgPub='sb_publishable_D2mx4zjyafTGDWbHfPvaAQ_e8gqOFk2';
+const vgSessionStorage='vowgarden-cloud-auth-v1';
+let vgSession=null,vgUser=null,vgCryptoKey=null,vgMeta=null,vgBusy=false,vgPanelOpen=false,vgConflict=null;
+let vgCloudMessage='Local only — automatic cloud backup is not enabled';
+let vgCloudOkay=false,vgCloudPause=false,vgCloudTimer=0,vgEditCounter=0;
+const vgHadLocalPlan=localStorage.getItem(KEY)!==null;
+const vgHasSecureOrigin=window.location.protocol==='https:'||window.location.hostname==='localhost'||window.location.hostname==='127.0.0.1';
+function vgMetaKey(){return 'vowgarden-cloud-meta-v1-'+(vgUser?.id||'none');}
+function vgGetMeta(){
+ try{return JSON.parse(localStorage.getItem(vgMetaKey()))||null;}catch{return null;}
+}
+function vgStoreMeta(){if(vgMeta&&vgUser)localStorage.setItem(vgMetaKey(),JSON.stringify(vgMeta));}
+function vgMarkDirty(){
+ if(vgCloudPause)return;
+ vgEditCounter++;
+ if(vgUser){
+  if(!vgMeta)vgMeta={version:0,dirty:true};
+  vgMeta.dirty=true;vgStoreMeta();
+  vgSetCloudStatus(navigator.onLine?'Local changes saved; waiting for cloud':'Offline changes saved locally',false);
+  vgScheduleSync(1800);
+ }
+}
+const vgOldSave=save;
+save=function(){const ok=vgOldSave();if(ok)vgMarkDirty();return ok;};
+function vgCloudUI(){
+ const label=vgCloudOkay?'vg-cloud-good':'vg-cloud-warn';
+ const session=vgUser?'<span class="vg-cloud-email">'+esc(vgUser.email||'Signed in')+'</span>':'';
+ const headline='<section id="vg-cloud" class="vg-cloud"><div class="vg-cloud-row"><div><strong>☁ Automatic encrypted backup</strong><div id="vg-cloud-status" class="'+label+'">'+esc(vgCloudMessage)+'</div></div><div class="vg-cloud-actions">'+session+'<button type="button" data-vgcloud="toggle">'+(vgPanelOpen?'Close':'Cloud settings')+'</button></div></div>'
+ + (vgPanelOpen?vgCloudDetails():'')+'</section>';
+ return headline;
+}
+function vgCloudDetails(){
+ if(!vgHasSecureOrigin)return '<p class="vg-cloud-note">Open the installed HTTPS version of VowGarden to use online backup. The local HTML version keeps working without a cloud account.</p>';
+ if(vgConflict)return '<div class="vg-cloud-warning"><strong>Two different wedding plans detected.</strong><p>No data has been overwritten. Choose which copy to keep; a JSON backup is downloaded before replacing it.</p><div class="vg-cloud-actions"><button type="button" data-vgcloud="use-cloud">Use cloud copy</button><button type="button" data-vgcloud="use-local">Keep this device</button></div></div>';
+ if(!vgUser)return '<p class="vg-cloud-note">Sign in or create your free VowGarden cloud account to protect wedding details and access them from other phones. Your content is encrypted before uploading.</p><form id="vg-cloud-login"><label>Email<input name="email" type="email" autocomplete="email" required></label><label>Password (min. 8 characters)<input name="password" type="password" autocomplete="current-password" minlength="8" required></label><div class="vg-cloud-actions"><button type="submit" name="mode" value="login">Sign in</button><button type="submit" name="mode" value="signup">Create account</button></div></form>';
+ if(!vgCryptoKey)return '<p class="vg-cloud-note">Enter a separate <strong>backup recovery phrase</strong> (at least 12 characters). You need the same phrase on every device. Store it safely: without it, encrypted cloud copies cannot be recovered.</p><form id="vg-cloud-unlock"><label>Recovery phrase<input name="passphrase" type="password" minlength="12" autocomplete="new-password" required></label><button type="submit">Unlock backup</button></form><div class="vg-cloud-actions"><button type="button" data-vgcloud="signout">Sign out</button></div>';
+ return '<p class="vg-cloud-note">When online, your changes are backed up automatically. Another signed-in device receives changes when open or reconnected. Offline changes are queued locally; conflicting edits are never silently overwritten.</p><div class="vg-cloud-actions"><button type="button" data-vgcloud="sync">Sync now</button><button type="button" data-vgcloud="signout">Sign out</button></div>';
+}
+const vgOldRenderCloud=render;
+render=function(){vgOldRenderCloud();document.querySelector('#view')?.insertAdjacentHTML('afterbegin',vgCloudUI());};
+function vgUpdateCloudUI(){
+ const root=document.getElementById('vg-cloud');
+ if(root)root.outerHTML=vgCloudUI();
+}
+function vgSetCloudStatus(message,good){
+ vgCloudMessage=message;vgCloudOkay=Boolean(good);
+ const e=document.querySelector('#vg-cloud-status');
+ if(e){e.textContent=message;e.className=good?'vg-cloud-good':'vg-cloud-warn';}
+}
+function vgScheduleSync(delay=1600){
+ clearTimeout(vgCloudTimer);
+ if(vgUser&&vgCryptoKey&&!vgConflict)vgCloudTimer=setTimeout(()=>vgSync().catch(e=>vgSetCloudStatus('Cloud paused: '+e.message,false)),delay);
+}
+function vgToB64(arr){
+ const bytes=arr instanceof Uint8Array?arr:new Uint8Array(arr);
+ let str='';for(let i=0;i<bytes.length;i+=15000)str+=String.fromCharCode(...bytes.subarray(i,i+15000));
+ return btoa(str);
+}
+function vgFromB64(s){const b=atob(s),out=new Uint8Array(b.length);for(let i=0;i<b.length;i++)out[i]=b.charCodeAt(i);return out;}
+function vgKeyStore(mode,key){
+ return new Promise((resolve,reject)=>{
+  const r=indexedDB.open('VowGardenDeviceKeysV1',1);
+  r.onupgradeneeded=()=>{if(!r.result.objectStoreNames.contains('keys'))r.result.createObjectStore('keys');};
+  r.onerror=()=>reject(r.error);
+  r.onsuccess=()=>{
+   const db=r.result,tx=db.transaction('keys',mode==='get'?'readonly':'readwrite');
+   const store=tx.objectStore('keys');
+   const q=mode==='get'?store.get(key):mode==='delete'?store.delete(key):store.put(vgCryptoKey,key);
+   q.onsuccess=()=>resolve(q.result);q.onerror=()=>reject(q.error);
+   tx.oncomplete=()=>db.close();
+  };
+ });
+}
+async function vgDeriveKey(pass){
+ const salt=await crypto.subtle.digest('SHA-256',new TextEncoder().encode('vowgarden-cloud-e2ee-v1|'+vgUser.id));
+ const material=await crypto.subtle.importKey('raw',new TextEncoder().encode(pass),'PBKDF2',false,['deriveKey']);
+ return crypto.subtle.deriveKey({name:'PBKDF2',hash:'SHA-256',salt,iterations:320000},material,{name:'AES-GCM',length:256},false,['encrypt','decrypt']);
+}
+async function vgEncrypt(plan){
+ const iv=crypto.getRandomValues(new Uint8Array(12));
+ const bytes=new TextEncoder().encode(JSON.stringify(plan));
+ const crypt=await crypto.subtle.encrypt({name:'AES-GCM',iv},vgCryptoKey,bytes);
+ return {encrypted_payload:vgToB64(crypt),iv:vgToB64(iv)};
+}
+async function vgDecrypt(row){
+ const bytes=await crypto.subtle.decrypt({name:'AES-GCM',iv:vgFromB64(row.iv)},vgCryptoKey,vgFromB64(row.encrypted_payload));
+ return sane(JSON.parse(new TextDecoder().decode(bytes)));
+}
+async function vgAccessToken(){
+ if(!vgSession?.access_token)throw Error('Sign in first');
+ if((vgSession.expires_at||0)*1000>Date.now()+60000)return vgSession.access_token;
+ if(!vgSession.refresh_token)throw Error('Session expired; sign in again');
+ const r=await fetch(vgApi+'/auth/v1/token?grant_type=refresh_token',{method:'POST',headers:{apikey:vgPub,'Content-Type':'application/json'},body:JSON.stringify({refresh_token:vgSession.refresh_token})});
+ const data=await r.json();if(!r.ok||!data.access_token)throw Error('Session expired; sign in again');
+ vgSession={...data,expires_at:Math.floor(Date.now()/1000)+(data.expires_in||3600)};localStorage.setItem(vgSessionStorage,JSON.stringify(vgSession));
+ return vgSession.access_token;
+}
+async function vgRequest(method,path,body,prefer){
+ const token=await vgAccessToken();
+ const h={apikey:vgPub,Authorization:'Bearer '+token,Accept:'application/json','Content-Type':'application/json'};
+ if(prefer)h.Prefer=prefer;
+ const r=await fetch(vgApi+'/rest/v1/'+path,{method,headers:h,body:body?JSON.stringify(body):undefined});
+ if(!r.ok){const e=await r.text();throw Error('Cloud request '+r.status+': '+e.slice(0,110));}
+ return r.status===204?[]:r.json();
+}
+async function vgGetRemote(){
+ const rows=await vgRequest('GET','vowgarden_cloud_snapshots?owner_id=eq.'+encodeURIComponent(vgUser.id)+'&select=owner_id,encrypted_payload,iv,version,updated_at');
+ return rows?.[0]||null;
+}
+function vgIsEditing(){return Boolean(document.querySelector('#modalBack.open'));}
+async function vgPull(row){
+ if(vgIsEditing())throw Error('Close the open editor before loading cloud changes.');
+ const start=vgEditCounter;
+ const incoming=await vgDecrypt(row);
+ if(vgEditCounter!==start)throw Error('A local edit occurred while downloading; review both copies.');
+ vgCloudPause=true;
+ try{state=incoming;vgOldSave();vgMeta={version:Number(row.version),dirty:false};vgStoreMeta();vgConflict=null;render();}
+ finally{vgCloudPause=false;}
+ vgSetCloudStatus('✓ Cloud copy restored • '+new Date(row.updated_at||Date.now()).toLocaleString(),true);vgUpdateCloudUI();
+}
+async function vgUpload(expected,remoteRow,allowReplace){
+ const generation=vgEditCounter,plain=JSON.parse(JSON.stringify(state));
+ const ciphertext=await vgEncrypt(plain);
+ let rows;
+ if(remoteRow){
+  const path='vowgarden_cloud_snapshots?owner_id=eq.'+encodeURIComponent(vgUser.id)+'&version=eq.'+expected+'&select=version,updated_at';
+  rows=await vgRequest('PATCH',path,{...ciphertext,version:expected+1,updated_at:new Date().toISOString()},'return=representation');
+  if(!Array.isArray(rows)||rows.length!==1){vgConflict=await vgGetRemote();vgPanelOpen=true;vgUpdateCloudUI();throw Error('Another device updated this wedding plan. Resolve the conflict.');}
+ }else{
+  try{rows=await vgRequest('POST','vowgarden_cloud_snapshots?select=version,updated_at',{owner_id:vgUser.id,...ciphertext,version:1},'return=representation');}
+  catch(e){vgConflict=await vgGetRemote();vgPanelOpen=true;vgUpdateCloudUI();throw Error('Another device created a cloud copy. Review both versions.');}
+ }
+ vgMeta={version:Number(rows[0].version),dirty:generation!==vgEditCounter};vgStoreMeta();
+ if(vgMeta.dirty)vgScheduleSync(1700);
+ vgSetCloudStatus(vgMeta.dirty?'New edits waiting to sync':'✓ Encrypted backup saved • '+new Date().toLocaleTimeString(),!vgMeta.dirty);
+ vgUpdateCloudUI();
+}
+async function vgSync(){
+ if(vgBusy||!vgUser||!vgCryptoKey||vgConflict||!navigator.onLine||vgIsEditing())return;
+ vgBusy=true;
+ try{
+  const row=await vgGetRemote();
+  if(row){
+   const remoteVersion=Number(row.version),localVersion=Number(vgMeta?.version||0);
+   if(localVersion===0){
+    if(!vgHadLocalPlan&&!vgMeta?.dirty){await vgPull(row);return;}
+    // Existing local files could contain real guest details: never overwrite implicitly.
+    vgConflict=row;vgPanelOpen=true;
+    vgSetCloudStatus('Different local and cloud plans — choose safely',false);vgUpdateCloudUI();return;
+   }
+   if(remoteVersion!==localVersion){
+    if(vgMeta?.dirty){
+     vgConflict=row;vgPanelOpen=true;
+     vgSetCloudStatus('Changes on two devices — choose which to keep',false);vgUpdateCloudUI();
+    }else await vgPull(row);
+    return;
+   }
+   if(vgMeta?.dirty)await vgUpload(localVersion,row,false);
+   else vgSetCloudStatus('✓ Encrypted cloud backup current',true);
+  }else{
+   if(vgMeta?.version){vgConflict={deleted:true,version:0};vgPanelOpen=true;vgSetCloudStatus('Cloud copy missing — review before restoring',false);vgUpdateCloudUI();return;}
+   await vgUpload(0,null,false);
+  }
+ }catch(e){vgSetCloudStatus('Local data safe • '+e.message,false);}
+ finally{vgBusy=false;}
+}
+async function vgResolve(prefer){
+ if(!vgConflict||!vgUser||!vgCryptoKey||vgBusy)return;
+ const row=vgConflict;
+ if(prefer==='cloud'){
+  if(!row.encrypted_payload)throw Error('No cloud copy exists');
+  if(!confirm('Replace this device’s wedding plan with the cloud version? We will download a local JSON backup first.'))return;
+  backup();await vgPull(row);return;
+ }
+ if(!confirm('Keep this device’s wedding plan? We will download the previous cloud copy as JSON before replacing it.'))return;
+ if(row.encrypted_payload){
+  const old=await vgDecrypt(row);
+  dl(new Blob([JSON.stringify(old,null,2)],{type:'application/json'}),'VowGarden_Previous_Cloud_Backup.json');
+ }
+ vgConflict=null;vgMeta={version:Number(row.version||0),dirty:true};vgStoreMeta();
+ await vgUpload(Number(row.version||0),row.encrypted_payload?row:null,true);
+}
+async function vgInitializeUser(data){
+ if(!data?.access_token||!data.user?.id)throw Error('You need to confirm your email and sign in.');
+ vgSession={...data,expires_at:Math.floor(Date.now()/1000)+(data.expires_in||3600)};
+ localStorage.setItem(vgSessionStorage,JSON.stringify(vgSession));
+ vgUser=data.user;vgMeta=vgGetMeta();vgCryptoKey=null;vgConflict=null;
+ try{vgCryptoKey=await vgKeyStore('get',vgUser.id)||null;}catch{vgCryptoKey=null;}
+ vgSetCloudStatus(vgCryptoKey?'Cloud connected — checking changes':'Signed in — unlock cloud backup',!!vgCryptoKey);
+ vgUpdateCloudUI();if(vgCryptoKey)vgScheduleSync(100);
+}
+async function vgLogin(email,password,create){
+ if(!navigator.onLine)throw Error('Internet needed for sign-in.');
+ const url=create?'/auth/v1/signup':'/auth/v1/token?grant_type=password';
+ const r=await fetch(vgApi+url,{method:'POST',headers:{apikey:vgPub,'Content-Type':'application/json'},body:JSON.stringify({email,password})});
+ const data=await r.json();
+ if(!r.ok)throw Error(data.msg||data.error_description||data.message||data.error||'Could not sign in');
+ if(create&&!data.access_token){vgSetCloudStatus('Account created. Check your inbox and verify the email, then sign in.',false);return;}
+ await vgInitializeUser(data);
+}
+async function vgUnlock(pass){
+ if(pass.length<12)throw Error('Recovery phrase must be at least 12 characters.');
+ const key=await vgDeriveKey(pass);
+ vgCryptoKey=key;
+ try{
+  const remote=await vgGetRemote();
+  if(remote)await vgDecrypt(remote); // Verify phrase before retaining its key.
+  await vgKeyStore('put',vgUser.id);
+  vgSetCloudStatus('Encryption unlocked; checking cloud changes',true);vgPanelOpen=false;vgUpdateCloudUI();vgScheduleSync(50);
+ }catch(e){vgCryptoKey=null;throw Error('Could not unlock your cloud backup. Check the recovery phrase. '+e.message);}
+}
+document.addEventListener('click',async e=>{
+ const btn=e.target.closest('[data-vgcloud]');if(!btn)return;
+ const action=btn.dataset.vgcloud;
+ if(action==='toggle'){vgPanelOpen=!vgPanelOpen;vgUpdateCloudUI();return;}
+ try{
+  if(action==='sync')await vgSync();
+  if(action==='use-cloud')await vgResolve('cloud');
+  if(action==='use-local')await vgResolve('local');
+  if(action==='signout'){
+   if(!confirm('Sign out of cloud backup on this device? Your local wedding plan will remain here.'))return;
+   clearTimeout(vgCloudTimer);
+   if(vgUser){try{await vgKeyStore('delete',vgUser.id);}catch{}}
+   const tok=vgSession?.access_token;
+   if(tok)fetch(vgApi+'/auth/v1/logout',{method:'POST',headers:{apikey:vgPub,Authorization:'Bearer '+tok}}).catch(()=>{});
+   vgSession=null;vgUser=null;vgCryptoKey=null;vgMeta=null;vgConflict=null;
+   localStorage.removeItem(vgSessionStorage);vgSetCloudStatus('Local only — cloud signed out',false);vgUpdateCloudUI();
+  }
+ }catch(err){vgSetCloudStatus('Cloud sync: '+err.message,false);vgUpdateCloudUI();}
+});
+document.addEventListener('submit',async e=>{
+ if(e.target.id!=='vg-cloud-login'&&e.target.id!=='vg-cloud-unlock')return;
+ e.preventDefault();
+ const form=e.target,fd=new FormData(form),submitter=e.submitter;
+ try{
+  vgSetCloudStatus('Connecting securely…',false);
+  if(form.id==='vg-cloud-login'){
+   await vgLogin(String(fd.get('email')||'').trim(),String(fd.get('password')||''),submitter?.value==='signup');
+  }else await vgUnlock(String(fd.get('passphrase')||''));
+ }catch(err){vgSetCloudStatus(err.message,false);}
+});
+window.addEventListener('online',()=>vgScheduleSync(600));
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)vgScheduleSync(600);});
+setInterval(()=>{if(!document.hidden)vgScheduleSync(0);},45000);
+(async()=>{
+ if(!vgHasSecureOrigin){vgSetCloudStatus('Local mode — open HTTPS version for automatic cloud backup',false);return;}
+ try{
+  vgSession=JSON.parse(localStorage.getItem(vgSessionStorage)||'null');
+  if(!vgSession?.access_token)return;
+  const token=await vgAccessToken();
+  const resp=await fetch(vgApi+'/auth/v1/user',{headers:{apikey:vgPub,Authorization:'Bearer '+token}});
+  if(!resp.ok)throw Error('Session expired');
+  const user=await resp.json();vgSession.user=user;
+  await vgInitializeUser(vgSession);
+ }catch(e){vgSession=null;vgUser=null;vgCryptoKey=null;vgSetCloudStatus('Sign in again to enable cloud backups',false);}
+})();
+
+render();
+})();
+</script>
+<script>
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js').catch(()=>{});
+</script>
+</body></html>
